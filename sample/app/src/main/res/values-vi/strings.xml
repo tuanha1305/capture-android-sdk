@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="document_screen_title_text">Máy quét Tài liệu</string>
+    <string name="face_screen_title_text">Máy quét khuôn mặt</string>
+
+    <string name="vnid_instruction">Đặt ID quốc gia của bạn vào Hộp</string>
+    <string name="dl_instruction">Đặt giấy phép lái xe vào trong hộp</string>
+    <string name="mrc_instruction">Đặt MRC của bạn vào trong Hộp</string>
+    <string name="eb_instruction">Đặt tiền điện của bạn vào trong Hộp</string>
+    <string name="bank_statement_instruction">Đặt Báo cáo Ngân hàng trong hộp</string>
+    <string name="insurance_instruction">Đặt Biên lai Bảo hiểm của bạn bên trong Hộp</string>
+    <string name="passport_instruction">Đặt Hộ chiếu của bạn vào Hộp</string>
+
+    <string name="vnid_front_message">ID quốc gia Việt Nam Mặt trận phía trước</string>
+    <string name="vnid_back_message">ID quốc gia Việt Nam Mặt sau</string>
+    <string name="dl_front_message">Giấy phép lái xe phía trước</string>
+    <string name="dl_back_message">Giấy phép Lái ​​xe</string>
+    <string name="mrc_message">Giấy chứng nhận đăng ký xe máy</string>
+    <string name="eb_message">Hóa đơn tiền điện</string>
+    <string name="bank_statement_page_1_message">Báo cáo Ngân hàng Page 1</string>
+    <string name="bank_statement_page_2_message">Báo cáo Ngân hàng Page 2</string>
+    <string name="insurance_1_message">Biên nhận Bảo hiểm Page 1</string>
+    <string name="insurance_2_message">Biên nhận Bảo hiểm Page 2</string>
+    <string name="passport_message">Mặt trước của Passport</string>
+</resources>

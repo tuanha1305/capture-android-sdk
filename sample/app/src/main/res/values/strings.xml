@@ -1,3 +1,29 @@
-<resources>
-    <string name="app_name">HyperSnapSample</string>
+ <resources>
+    <string name="app_name">HyperSnap Demo</string>
+    <string name="document_screen_title_text">Document Scanner</string>
+    <string name="face_screen_title_text">Face Scanner</string>
+
+     <string name="stay_still">Capture Now</string>
+     <string name="place_face">Place your face within circle</string>
+
+
+     <string name="vnid_instruction">Place your National ID inside the Box</string>
+    <string name="dl_instruction">Place your Driving Licence inside the Box</string>
+    <string name="mrc_instruction">Place your MRC inside the Box</string>
+    <string name="eb_instruction">Place your Electricity Bill inside the Box</string>
+    <string name="bank_statement_instruction">Place your Bank Statement inside the Box</string>
+    <string name="insurance_instruction">Place your Insurance Receipt inside the Box</string>
+    <string name="passport_instruction">Place your Passport inside the Box</string>
+
+    <string name="vnid_front_message">Vietnam National ID Front Side</string>
+    <string name="vnid_back_message">Vietnam National ID Back Side</string>
+    <string name="dl_front_message">Driving Licence Front Side</string>
+    <string name="dl_back_message">Driving Licence Back Side</string>
+    <string name="mrc_message">Motor Registration Certificate</string>
+    <string name="eb_message">Electricity Bill</string>
+    <string name="bank_statement_page_1_message">Bank Statement Page 1</string>
+    <string name="bank_statement_page_2_message">Bank Statement Page 2</string>
+    <string name="insurance_1_message">Insurance Receipt Page 1</string>
+    <string name="insurance_2_message">Insurance Receipt Page 2</string>
+    <string name="passport_message">Front Side of Passport</string>
 </resources>
