@@ -14,6 +14,6 @@
 ### Version 2.0.0
 - Liveness Module Added
 - UI revamp in both document and face capture Activities
-- Moved the 'Document' enum to 'HyperSnapSDK.Document'
+- Moved the 'Document' enum to 'HyperSnapParams.Document'
 
 
