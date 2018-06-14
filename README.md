@@ -50,7 +50,7 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.0.0@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.0.1@aar', {
           transitive=true
           exclude group: 'com.android.support'
       })

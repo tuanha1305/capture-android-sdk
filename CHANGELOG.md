@@ -16,4 +16,5 @@
 - UI revamp in both document and face capture Activities
 - Moved the 'Document' enum to 'HyperSnapSDK.Document'
 
-
+### Version 2.0.1
+- Crash Fix in HVDocsActivity on multiple clicks
