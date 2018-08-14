@@ -1,10 +1,11 @@
-# HyperSnapSDK Documentation
+
+## HyperSnapSDK Documentation for Android
 
 ## Overview
 
 HyperSnapSDK is HyperVerge's documents + face capture SDK that captures images at a resolution appropriate for our proprietary Deep Learning OCR and Face Recognition Engines.
 
-The framework provides a liveness feature that uses our advanced AI Engines to tell if a captured image is that of a real person or a photograph.
+The framework provides a liveness feature that uses our advanced AI Engines to differentiate between a real user capturing his/her selfie from a photo/video recording.
 
 ### Requirements
 - Gradle Version: 4.1 (Recommended)
@@ -12,9 +13,13 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
 - minSdkVersion 19
 - targetSdkVersion 26
 
+### ChangeLog
+You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
+
 ## Table Of Contents
 - [Overview](#overview)
 	- [Requirements](#requirements)
+	- [ChangeLog](#changelog)
 - [Table Of Contents](#table-of-contents)
 - [Example Project](#example-project)
 - [Integration Steps](#integration-steps)
@@ -34,7 +39,8 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
 ## Example Project
 - Please refer to the sample app provided in the repo to get an understanding of the implementation process.
 - To run the app, clone/download the repo and open **sample** using latest version of Android Studio
-- Open project build.gradle and replace **aws_access_key** and **aws_secret_pass** with the credentials provided by HyperVerge
+- Open project build.gradle and replace `aws_access_key` and `aws_secret_pass` with the credentials provided by HyperVerge
+- Add `appId` and `appKey` to the `init` method in `HyperSnapSampleApp`
 - Build and run the app
 
 ## Integration Steps
@@ -50,7 +56,7 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.0.3@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.2.0@aar', {
           transitive=true
           exclude group: 'com.android.support'
       })
@@ -72,7 +78,7 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
   }
   ```
   where **aws_access_key** and **aws_secret_pass** will be given by HyperVerge
-  
+
 ### 2. App Permissions
 -  The app requires the following permissions to work.
     - *Camera*
@@ -81,14 +87,15 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
     Kindly note that for android v23 (Marshmallow) and above, you need to handle the runtime permissions inside your app.
 
 ### 3. Initializing the SDK
-- Add the following line to your Application class (the class which extends android.app.Application) for initializing our Library. This must be run only once. Check [this](https://guides.codepath.com/android/Understanding-the-Android-Application-Class) link if you are unsure of what an Application class is. 
+- Add the following line to your Application class (the class which extends android.app.Application) for initializing our Library. This must be run only once. Check [this](https://guides.codepath.com/android/Understanding-the-Android-Application-Class) link if you are unsure of what an Application class is.
   ```java
   HyperSnapSDK.init(context, APP_ID, APP_KEY, region, product);
   ```
 	Where,
 	- appId, appKey are given by HyperVerge
 	- region: This is an enum, `HypeSnapParams.Region` with three values - `AsiaPacific`, `India` and `UnitedStates`.
-	- product: This is an enum, `HyperSnapParams.Product` with two values - `faceID` annd `faceIAM`. 
+	- product: This is an enum, `HyperSnapParams.Product` with two values - `faceID` annd `faceIAM`. Right now, only `faceID` is supported.
+>**Note**: This step is required only if liveness is used.
 
 ### 4. Launching the Activities
 
@@ -101,38 +108,39 @@ The framework provides a liveness feature that uses our advanced AI Engines to t
   where:
   - **context** is the context of the current Activity being displayed
   -  **myCaptureCompletionListener** is an object of `CaptureCompletionHandler` and has been described later
-  - **document** is an enum of type HyperSnapParams.Document. It specifies the document type that needs to be captured. 
+  - **document** is an enum of type HyperSnapParams.Document. It specifies the document type that needs to be captured.
     The parameter can be initialized as follows:
    ```java
-  Document document = HyperSnapParams.Document.CARD;
+	 Document document = HyperSnapParams.Document.CARD;
   ```
    where `aspectRatio` is a float specifying the aspectRatio of the document
-      
-  Following are the types of documents supported by the Document enum:
-  - **CARD**: Aspect ratio : 0.625. Example: Vietnamese National ID, Driving License, Motor Registration Certificate
-  - **PASSPORT**: Aspect ratio: 0.67. Example: Passports
-  - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt
-  - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
+
+  -Following are the types of documents supported by the Document enum:
+    - **CARD**: Aspect ratio : 0.625. Example: Vietnamese National ID, Driving License, Motor Registration Certificate
+    - **PASSPORT**: Aspect ratio: 0.67. Example: Passports
+    - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt
+    - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
 
   Also, Document supports the following customizations:
   - **topText**: The text displayed at the top section of the Camera Preview in HVDocsActivity.  It meant to tell the user about the document type. The text can be altered by calling following method:
     ```java
-    document.setTopText("Driving Licence Front Side");
+    document.setTopText("ID Card Front Side");
     ```
   - **bottomText**: The text displayed at the bottom end of the Camera Preview in HVDocsActivity. This is to communicate the positioning of the document to the user. The text can be altered by calling following method:
     ```java
-    document.setBottomText("Place your Driving License inside the Box");
+    document.setBottomText("Place your ID Card inside the Box");
+    ```
 
 #### For Face Capture
 For capturing face image, following method should be called:
   ```java
-  HVFaceActivity.start(context, HyperSnapParams.LivenessMode.MODE, myCaptureCompletionListener);
+	HVFaceActivity.start(context, HyperSnapParams.LivenessMode.MODE, myCaptureCompletionListener);
   ```
   where:
   - **context** is the context of the current Activity being displayed
   - **myCaptureCompletionListener** is an object of `CaptureCompletionHandler` and has been described later.
   - **LivenessMode.MODE** described later.
- 
+
 
 #### CaptureCompletionHandler
 CaptureCompletionHandler is an interface whose object needs to be passed with start method of both FaceCaptureActivity and DocumentActivity. It has methods which has to be implemented by the object to handle both the responses of document capture and the errors that occured during capture. Following is a sample implementation of CaptureCompletionHandler:
@@ -153,31 +161,25 @@ CaptureCompletionHandler is an interface whose object needs to be passed with st
   ```
 
 #### Liveness in Face Capture:
-The SDK has two liveness detection methods. Texture liveness and Gesture Liveness. This can be set using the `livenessMode` parameter in the `start` method of `
-ctivity` discussed earlier.
+The SDK has two liveness detection methods. Texture liveness and Gesture Liveness. This can be set using the `livenessMode` parameter in the `start` method of `HVFaceActivity` discussed earlier.
 
 Here, `livenessMode` is of type `HypeSnapParams.LivenessMode`, an enum with 3 values:
 
-**.none**: No liveness test is performed. The selfie that is captured is simply returned. If successful, the result JSON in the CaptureCompletionHandler has one key-value pair. 
+**.none**: No liveness test is performed. The selfie that is captured is simply returned. If successful, the result JSON in the CaptureCompletionHandler has one key-value pair.
 - `imageUri` : local path of the image captured
 
 **.textureLiveness** : Texture liveness test is performed on the selfie captured.  If successful, a result JSON with the following key-value pairs is returned in the CaptureCompletionHandler
 
 - `imageUri` : String. Local path of the image captured <br/>
 - `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not.
-- `liveness-score`: Float with values between 0 and 1.
-- The confidence score for the liveness prediction.
-- `to-be-reviewed`: String with values 'yes'/'no'. Yes indicates that it flagged for manual review.
+- `liveness-score`: Float with values between 0 and 1. The confidence score for the liveness prediction.
+- `to-be-reviewed`: String with values 'yes'/'no'. Yes indicates that it is flagged for manual review.
 
-**.textureAndGestureLiveness**: In this mode, based on the results of the texture Liveness call, the user might be asked to do a series of gestures to confirm liveness. The user performing the gestures is arbitrarily matched with the selfie captured. If  one or more of these matches fail, a 'faceMatch' error is returned (refer to 'Error Codes' section). 
-If all the gestures are succefully performed and the face matches are sucessful, a result JSON with the following key-value pairs is returned in the CaptureCompletionHandler
-- `imageUri` : String. Local path of the image captured <br/>
-- `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not.
-  Following are the errors that can occur during capture process:
+**.textureAndGestureLiveness**: In this mode, based on the results of the texture Liveness call, the user might be asked to do a series of gestures to confirm liveness. This mode is currently in beta. It is highly recommended to not use it in production.
+
 
 ## Error Codes
-Descriptions of the error codes returned in the CaptureCompletionHandler are given here. 
-
+Descriptions of the error codes returned in the CaptureCompletionHandler are given here.
 
 |Description|Explanation|Action|
 |-----------|-----------|------|
@@ -194,15 +196,17 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
 ## Advanced
 
 ### Customizations
-- Some text fields, element colors, font styles, and button icons are customizable so that the look and feel of the components inside SDK can be altered to match the look and field of the app using the SDK. **Kindly note that this step is optional**. Below is the list of items that are customizable grouped by the resource file/type where the customized value/file(s) should be placed in.
-    - **strings.xml**:
-      ```xml
+Some text fields, element colors, font styles, and button icons are customizable so that the look and feel of the components inside SDK can be altered to match the look and field of the app using the SDK. **Kindly note that this step is optional**. Below is the list of items that are customizable grouped by the resource file/type where the customized value/file(s) should be placed in.
+
+**strings.xml**:
+
       <string name="document_screen_title_text">Document Scanner</string>
       <string name="face_screen_title_text">Face Scanner</string>
-      <string name="place_face">Place your face within circle</string>
-      <string name="stay_still"> Capture Now </string>
-      ```
+      <string name="placeFaceInCircle">Place your face within circle</string>
+      <string name="captureNow"> Capture Now </string>
+      <string name="moveAway"> Move away from the phone</string>
+      <string name="activityText">Processing</string>
 
 
 ## Contact Us
-If you are interested in integrating this SDK, please do send us a mail at [contact@hyperverge.co](mailto:contact@hyperverge.co) explaining your use case. We will give you the `aws_access_key` & `aws_secret_pass` so that you can try it out. Learn more about HyperVerge [here](http://hyperverge.co/).
+If you are interested in integrating this SDK, please do send us a mail at [contact@hyperverge.co](mailto:contact@hyperverge.co) explaining your use case. We would give you the necessary credentials to try it out. Learn more about HyperVerge [here](http://hyperverge.co/).

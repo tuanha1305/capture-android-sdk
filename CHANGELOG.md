@@ -21,3 +21,11 @@
 
 ### Version 2.0.3
 - Fixed issue with multiple permissions in Manifest file
+
+
+### Version 2.2.0
+- Added AUTHENTICATION_ERROR for wrong appID and appKey
+- UI changes in HVDocsActivity
+- Modified localisation support to ease integration with react native
+- Performance improvements
+- Minor bug fixes

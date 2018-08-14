@@ -1,8 +1,13 @@
 package co.hyperverge.hypersnapsample;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 import co.hyperverge.hypersnapsdk.R;
 import co.hyperverge.hypersnapsdk.activities.HVDocsActivity;
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         resultView = (TextView) findViewById(R.id.tv_result);
         findViewById(R.id.tv_a4).setOnClickListener(this);
         findViewById(R.id.tv_other).setOnClickListener(this);
@@ -127,7 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return missingPermissions;
     }
 
-    public void startAppropriateDocumentActivity(HyperSnapParams.Document document) {
+
+    public void startAppropriateDocumentActivity(final HyperSnapParams.Document document) {
 
         HVDocsActivity.start(MainActivity.this, selectedDocument, new CaptureCompletionHandler() {
             @Override
@@ -149,15 +158,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setLocale();
+
+    }
+
+    public void setLocale() {
+        Locale locale = new Locale("");
+        Locale.setDefault(locale);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        config.locale = locale;
+        Resources res = getBaseContext().getResources();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+    }
+
     public void startFaceCaptureActivity() {
 
         HVFaceActivity.start(MainActivity.this, mode, new CaptureCompletionHandler() {
             @Override
-            public void onResult(Error error, JSONObject result) {
+            public void onResult(Error error, final JSONObject result) {
                 if (error != null) {
-                    resultView.setText( " Msg: " + error.getErrMsg() + "ERROR: " + error.getError().name() );
+                    resultView.setText(" Msg: " + error.getErrMsg() + "ERROR: " + error.getError().name());
                 } else {
-                    resultView.setText(result.toString());
+                    try {
+                        resultView.setText(result.toString());
+                        Toast.makeText(MainActivity.this, result.getString("imageUri"), Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Glide.with(MainActivity.this).load(result.getString("imageUri")).dontAnimate().into((ImageView) findViewById(R.id.iv_result));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, 100);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -198,12 +240,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
         if (id == R.id.texture_liveness) {
             mode = HyperSnapParams.LivenessMode.TEXTURELIVENESS;
         } else if (id == R.id.gesture_liveness) {
-            mode = HyperSnapParams. LivenessMode.TEXTUREANDGESTURELIVENESS;
+            mode = HyperSnapParams.LivenessMode.TEXTUREANDGESTURELIVENESS;
         } else if (id == R.id.none_liveness) {
             mode = HyperSnapParams.LivenessMode.NONE;
         }

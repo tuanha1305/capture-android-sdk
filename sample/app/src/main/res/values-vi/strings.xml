@@ -3,6 +3,11 @@
     <string name="document_screen_title_text">Máy quét Tài liệu</string>
     <string name="face_screen_title_text">Máy quét khuôn mặt</string>
 
+    <string name="placeFaceInCircle">Dặt khuôn mặt của bạn trong vòng tròne</string>
+    <string name="captureNow">Bấm chụp ảnh tự sướng</string>
+    <string name="moveAway">Di chuyển ra khỏi điện thoại</string>
+
+
     <string name="vnid_instruction">Đặt ID quốc gia của bạn vào Hộp</string>
     <string name="dl_instruction">Đặt giấy phép lái xe vào trong hộp</string>
     <string name="mrc_instruction">Đặt MRC của bạn vào trong Hộp</string>
