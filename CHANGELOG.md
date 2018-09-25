@@ -29,3 +29,10 @@
 - Modified localisation support to ease integration with react native
 - Performance improvements
 - Minor bug fixes
+
+### Version 2.3.0
+-  Added optional Instruction Pages for Face and Document Capture
+-  Added Review Page for Document capture
+-  Added provision for style customisation for all prominent labels and buttons
+-  Added optional 'clientID' field to liveness calls
+-  Added customisation options for strings and colors used in the SDK 
