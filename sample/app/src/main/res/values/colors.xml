@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Overriding SDK colors here -->
+    <color name="title_text_color">#434343</color>
+    <color name="content_text_color">#4A4A4A</color>
+
 </resources>

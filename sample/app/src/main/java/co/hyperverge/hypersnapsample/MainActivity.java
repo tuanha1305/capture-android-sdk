@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final int MY_PERMISSIONS_REQUEST_CAMERA_ACTIVITY = 101;
     private ArrayList<String> runtimePermissions = new ArrayList<>(Arrays.asList(Manifest.permission.CAMERA));
 
+    /**
+     * Document and Liveness have been moved to their respective parent configuration classes.
+     */
     private HVDocConfig.Document selectedDocument;
     HVFaceConfig.LivenessMode mode = HVFaceConfig.LivenessMode.TEXTURELIVENESS;
     TextView resultView;
@@ -168,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setLocale() {
+        /**
+         * To set a locale for country, the contry code is set in Locale constructor
+         * Locale locale = new Locale("vi") - Vietnam
+         */
         Locale locale = new Locale("");
         Locale.setDefault(locale);
         Configuration config = getBaseContext().getResources().getConfiguration();
@@ -178,6 +185,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void startFaceCaptureActivity() {
+        /**
+         * HVFaceConfig is the configuration class to set parameters for HVFaceActivity
+         */
         HVFaceConfig config = new HVFaceConfig();
         config.setLivenessMode(mode);
         config.setFaceCaptureTitleText(" Face capture  ");
@@ -212,12 +222,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View view) {
+        /**
+         * HVDocConfig is the configuration class to set parameters for HVDocsActivity
+         */
+
         HVDocConfig docConfig = new HVDocConfig();
         docConfig.setShouldShowFlashIcon(false);
         docConfig.setReviewScreenInstructionText("Is your document fully visible, glare free and not blurred ?");
         docConfig.setReviewScreenTitleText("Review your photo");
         docConfig.setShouldShowReviewScreen(true);
         docConfig.setShouldShowInstructionPage(true);
+
         if (view.getId() == R.id.tv_a4) {
             selectedDocument = HVDocConfig.Document.A4;
             docConfig.setCaptureScreenTitleText("Docs Capture");
@@ -229,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.tv_card) {
             selectedDocument = HVDocConfig.Document.CARD;
             docConfig.setCaptureScreenTitleText("Docs Capture");
-            selectedDocument.setCapturePageInstructionText("Make sure your document is without any. Glare and is fully inside");
+            selectedDocument.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
             selectedDocument.setCapturePageSubText("Place your Card in the box");
             docConfig.setDocument(selectedDocument);
             startAppropriateDocumentActivity(docConfig);
