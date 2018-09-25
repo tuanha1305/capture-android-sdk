@@ -2,15 +2,17 @@
     <string name="app_name">HyperSnap Demo</string>
 
     <!-- Customisation strings in SDK -->
+     <!-- Face capture screen -->
+     <string name="faceCaptureFaceFound">Capture Now</string>
+     <string name="faceCaptureFaceNotFound">Place your face within circle</string>
+     <string name="faceCaptureMoveAway"> Move away from the phone</string>
+     <string name="faceCaptureActivity">Processing</string>
 
      <!-- Document capture review screen -->
      <string name="docReviewRetakeButton">Retake</string>
      <string name="docReviewContinueButton">Use This Photo</string>
      <string name="docReviewTitle">Review Your Photo</string>
-
-     <!-- Face capture screen -->
-     <string name="faceCaptureFaceFound">Capture Now</string>
-     <string name="faceCaptureFaceNotFound">Place your face within circle</string>
+     <string name="docReviewDescription">Is your document fully visible, glare free and not blurred?</string>
 
      <!--Doc Capture Instruction Page -->
      <string name="docInstructionsTitle">ID Capture Tips</string>
@@ -19,14 +21,15 @@
      <string name="docInstructions3">Avoid glare</string>
      <string name="docInstructionsProceed">Proceed to Capture ID</string>
 
-     <!--Face Capture Instruction Page -->
 
+     <!--Face Capture Instruction Page -->
      <string name="faceInstructionsTitle">Selfie Tips</string>
      <string name="faceInstructionsTop1">Good lighting on your face</string>
      <string name="faceInstructionsTop2">Hold phone in front of you</string>
      <string name="faceInstructionsNoGlasses">No Glasses</string>
      <string name="faceInstructionsBrightLight">Bright Light</string>
      <string name="faceInstructionsNoHat">No Hat</string>
+     <string name="faceInstructionsProceed">Proceed to Take Selfie</string>
 
 
 </resources>
