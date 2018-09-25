@@ -76,7 +76,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   }
   ```
   where **aws_access_key** and **aws_secret_pass** will be given by HyperVerge
-  
+
 ### 2. App Permissions
 -  The app requires the following permissions to work.
     - *Camera*
@@ -92,7 +92,8 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	Where,
 	- appId, appKey are given by HyperVerge
 	- region: This is an enum, `HypeSnapParams.Region` with three values - `AsiaPacific`, `India` and `UnitedStates`.
-	- product: This is an enum, `HyperSnapParams.Product` with two values - `faceID` annd `faceIAM`. 
+	- product: This is an enum, `HyperSnapParams.Product` with two values - `faceID` annd `faceIAM`. Right now, only `faceID` is supported.
+>**Note**: This step is required only if liveness is used.
 
 ### 4. Launching the Activities
 
@@ -184,8 +185,7 @@ Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 valu
 
 - `imageUri` : String. Local path of the image captured <br/>
 - `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not.
-- `liveness-score`: Float with values between 0 and 1.
-- The confidence score for the liveness prediction.
+- `liveness-score`: Float with values between 0 and 1.The  confidence score for the liveness prediction.
 - `to-be-reviewed`: String with values 'yes'/'no'. Yes indicates that it flagged for manual review.
 
 **.textureAndGestureLiveness**: In this mode, based on the results of the texture Liveness call, the user might be asked to do a series of gestures to confirm liveness. This mode is currently in beta. It is highly recommended to not use it in production.
