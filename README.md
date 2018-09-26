@@ -118,9 +118,9 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
         ```
       - Following are the types of documents supported by the Document enum:
 
-          - **CARD**: Aspect ratio: 0.625. Example: Vietnamese National ID, Driving License, Motor Registration Certificate
+          - **CARD**: Aspect ratio: 0.625. Example: Vietnamese National ID, Driving License, Motor Registration Certificate.
           - **PASSPORT**: Aspect ratio: 0.67. Example: Passports
-          - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt
+          - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt.
           - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
     	    where `aspectRatio` is a float specifying the aspectRatio of the document.
         - Also, Document supports the following customizations:
@@ -136,7 +136,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
     - **setShouldShowReviewScreen**: (Boolean) To determine if the document review page should be shown after capture page. It defaults to `false`.
     - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
     - **setShouldShowFlashIcon**: (Boolean) Setting this to true will add a flash toggle button at the top right corner of the screen. It defaults to `false`.
-    - **setShouldAddPadding**: (Boolean) Setting this to true will enable extra padding that will added to all images captured using the Document Capture activity. It defaults to `true`.
+    - **setShouldAddPadding**: (Boolean) Setting this to true will enable extra padding that will be added to all images captured using the Document Capture activity. It defaults to `true`.
     -  **setCaptureScreenTitleText**: (String) To set the title text that is shown in the document capture page. 
     - **setReviewScreenTitleText**: (String) To set the title text that is shown in the Review screen after a document has been captured.
     - **setReviewScreenInstructionText**: (String) To set the instruction text that is shown in the Review screen after a document has been captured.              
@@ -182,17 +182,17 @@ The SDK has two liveness detection methods. Texture liveness and Gesture Livenes
 Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 values:
 
 **.none**: No liveness test is performed. The selfie that is captured is simply returned. If successful, the result JSON in the CaptureCompletionHandler has one key-value pair.
-- `imageUri`: local path of the image captured
+- `imageUri`: local path of the image captured.
 
 **.textureLiveness**: Texture liveness test is performed on the selfie captured.  If successful, a result JSON with the following key-value pairs is returned in the CaptureCompletionHandler.
 
-- `imageUri`: String. Local path of the image captured <br/>
+- `imageUri`: String. Local path of the image captured.
 - `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not.
 - `liveness-score`: Float with values between 0 and 1.The  confidence score for the liveness prediction.
 - `to-be-reviewed`: String with values 'yes'/'no'. Yes indicates that it flagged for manual review.
 
 **.textureAndGestureLiveness**: In this mode, based on the results of the texture Liveness call, the user might be asked to do a series of gestures to confirm liveness. This mode is currently in beta. It is highly recommended to not use it in production.
-- `imageUri`: String. Local path of the image captured <br/>
+- `imageUri`: String. Local path of the image captured.
 - `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not. This mode is currently in beta. It is highly recommended to not use it in production.
 
 
