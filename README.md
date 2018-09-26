@@ -124,11 +124,11 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
           - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
     	    where `aspectRatio` is a float specifying the aspectRatio of the document.
         - Also, Document supports the following customizations:
-      	    - **capturePageInstructionText**: The text displayed at the top section of the Camera Preview in HVDocsActivity. It meant to tell the user about the document type. The text can be altered by calling following method:
+      	    - **capturePageInstructionText**: The text displayed at the top section of the Camera Preview in HVDocsActivity. This is to communicate the positioning of the document to the user. The text can be altered by calling following method:
         	    ```java
         	    document.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
         	    ```
-      	    - **capturePageSubText**: The text displayed at the bottom end of the Camera Preview in HVDocsActivity. This is to 	                  communicate the positioning of the document to the user. The text can be altered by calling following method:
+      	    - **capturePageSubText**: The text displayed at the bottom end of the Camera Preview in HVDocsActivity. It is meant to tell the user about the document type. The text can be altered by calling following method:
         	    ```java
             	document.setCapturePageSubText("Front side");
 		        ```
