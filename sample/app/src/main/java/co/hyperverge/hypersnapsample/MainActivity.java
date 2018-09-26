@@ -32,6 +32,8 @@ import co.hyperverge.hypersnapsdk.activities.HVDocsActivity;
 import co.hyperverge.hypersnapsdk.activities.HVFaceActivity;
 import co.hyperverge.hypersnapsdk.listeners.CaptureCompletionHandler;
 import co.hyperverge.hypersnapsdk.objects.Error;
+import co.hyperverge.hypersnapsdk.objects.HVDocConfig;
+import co.hyperverge.hypersnapsdk.objects.HVFaceConfig;
 import co.hyperverge.hypersnapsdk.objects.HyperSnapParams;
 
 
@@ -40,8 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final int MY_PERMISSIONS_REQUEST_CAMERA_ACTIVITY = 101;
     private ArrayList<String> runtimePermissions = new ArrayList<>(Arrays.asList(Manifest.permission.CAMERA));
 
-    private HyperSnapParams.Document selectedDocument;
-    HyperSnapParams.LivenessMode mode = HyperSnapParams.LivenessMode.TEXTURELIVENESS;
+    /**
+     * Document and Liveness have been moved to their respective parent configuration classes.
+     */
+    private HVDocConfig.Document selectedDocument;
+    HVFaceConfig.LivenessMode mode = HVFaceConfig.LivenessMode.TEXTURELIVENESS;
     TextView resultView;
 
     @Override
@@ -136,9 +141,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void startAppropriateDocumentActivity(final HyperSnapParams.Document document) {
+    public void startAppropriateDocumentActivity(final HVDocConfig docConfig) {
 
-        HVDocsActivity.start(MainActivity.this, selectedDocument, new CaptureCompletionHandler() {
+        HVDocsActivity.start(MainActivity.this, docConfig, new CaptureCompletionHandler() {
             @Override
             public void onResult(Error error, JSONObject result) {
 
@@ -166,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setLocale() {
+        /**
+         * To set a locale for country, the contry code is set in Locale constructor
+         * Locale locale = new Locale("vi") - Vietnam
+         */
         Locale locale = new Locale("");
         Locale.setDefault(locale);
         Configuration config = getBaseContext().getResources().getConfiguration();
@@ -176,8 +185,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void startFaceCaptureActivity() {
-
-        HVFaceActivity.start(MainActivity.this, mode, new CaptureCompletionHandler() {
+        /**
+         * HVFaceConfig is the configuration class to set parameters for HVFaceActivity
+         */
+        HVFaceConfig config = new HVFaceConfig();
+        config.setLivenessMode(mode);
+        config.setFaceCaptureTitleText(" Face capture  ");
+        config.setShouldShowInstructionPage(true);
+        HVFaceActivity.start(MainActivity.this, config, new CaptureCompletionHandler() {
             @Override
             public void onResult(Error error, final JSONObject result) {
                 if (error != null) {
@@ -206,32 +221,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
     public void onClick(View view) {
+        /**
+         * HVDocConfig is the configuration class to set parameters for HVDocsActivity
+         */
+
+        HVDocConfig docConfig = new HVDocConfig();
+        docConfig.setShouldShowFlashIcon(false);
+        docConfig.setReviewScreenInstructionText("Is your document fully visible, glare free and not blurred ?");
+        docConfig.setReviewScreenTitleText("Review your photo");
+        docConfig.setShouldShowReviewScreen(true);
+        docConfig.setShouldShowInstructionPage(true);
         if (view.getId() == R.id.tv_a4) {
-            selectedDocument = HyperSnapParams.Document.A4;
-            selectedDocument.setTopText("A4 Document");
-            selectedDocument.setBottomText("Place your A4 document in the box");
-            startAppropriateDocumentActivity(selectedDocument);
+            selectedDocument = HVDocConfig.Document.A4;
+            docConfig.setCaptureScreenTitleText("Docs Capture");
+            selectedDocument.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
+            selectedDocument.setCapturePageSubText("Place your A4 document in the box");
+            docConfig.setDocument(selectedDocument);
+            startAppropriateDocumentActivity(docConfig);
         }
         if (view.getId() == R.id.tv_card) {
-            selectedDocument = HyperSnapParams.Document.CARD;
-            selectedDocument.setTopText("Card Front Side");
-            selectedDocument.setBottomText("Place your Card in the box");
-            startAppropriateDocumentActivity(selectedDocument);
+            selectedDocument = HVDocConfig.Document.CARD;
+            docConfig.setCaptureScreenTitleText("Docs Capture");
+            selectedDocument.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
+            selectedDocument.setCapturePageSubText("Place your Card in the box");
+            docConfig.setDocument(selectedDocument);
+            startAppropriateDocumentActivity(docConfig);
         }
         if (view.getId() == R.id.tv_other) {
-            selectedDocument = HyperSnapParams.Document.OTHER;
-            selectedDocument.setTopText("Custom Document");
-            selectedDocument.setBottomText("Place your document in the box");
+            selectedDocument = HVDocConfig.Document.OTHER;
+            docConfig.setCaptureScreenTitleText("Docs Capture");
+            selectedDocument.setCapturePageInstructionText("Custom Document");
+            selectedDocument.setCapturePageSubText("Place your document in the box");
 //            selectedDocument.setAspectRatio(0.25f);
-            startAppropriateDocumentActivity(selectedDocument);
+            docConfig.setDocument(selectedDocument);
+            startAppropriateDocumentActivity(docConfig);
         }
         if (view.getId() == R.id.tv_passport) {
-            selectedDocument = HyperSnapParams.Document.PASSPORT;
-            selectedDocument.setTopText("Passport Front Side");
-            selectedDocument.setBottomText("Place your Passport in the box");
-            startAppropriateDocumentActivity(selectedDocument);
+            selectedDocument = HVDocConfig.Document.PASSPORT;
+            docConfig.setCaptureScreenTitleText("Docs Capture");
+            selectedDocument.setCapturePageInstructionText("Passport Front Side");
+            selectedDocument.setCapturePageSubText("Place your Passport in the box");
+            docConfig.setDocument(selectedDocument);
+            startAppropriateDocumentActivity(docConfig);
         }
 
         if (view.getId() == R.id.tv_face) {
@@ -244,11 +276,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
         if (id == R.id.texture_liveness) {
-            mode = HyperSnapParams.LivenessMode.TEXTURELIVENESS;
+            mode = HVFaceConfig.LivenessMode.TEXTURELIVENESS;
         } else if (id == R.id.gesture_liveness) {
-            mode = HyperSnapParams.LivenessMode.TEXTUREANDGESTURELIVENESS;
+            mode = HVFaceConfig.LivenessMode.TEXTUREANDGESTURELIVENESS;
         } else if (id == R.id.none_liveness) {
-            mode = HyperSnapParams.LivenessMode.NONE;
+            mode = HVFaceConfig.LivenessMode.NONE;
         }
     }
 }

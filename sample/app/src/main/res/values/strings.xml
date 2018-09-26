@@ -1,29 +1,35 @@
  <resources>
     <string name="app_name">HyperSnap Demo</string>
-    <string name="document_screen_title_text">Document Scanner</string>
-    <string name="face_screen_title_text">Face Scanner</string>
 
-     <string name="stay_still">Capture Now</string>
-     <string name="place_face">Place your face within circle</string>
+    <!-- Customisation strings in SDK -->
+     <!-- Face capture screen -->
+     <string name="faceCaptureFaceFound">Capture Now</string>
+     <string name="faceCaptureFaceNotFound">Place your face within circle</string>
+     <string name="faceCaptureMoveAway"> Move away from the phone</string>
+     <string name="faceCaptureActivity">Processing</string>
+
+     <!-- Document capture review screen -->
+     <string name="docReviewRetakeButton">Retake</string>
+     <string name="docReviewContinueButton">Use This Photo</string>
+     <string name="docReviewTitle">Review Your Photo</string>
+     <string name="docReviewDescription">Is your document fully visible, glare free and not blurred?</string>
+
+     <!--Doc Capture Instruction Page -->
+     <string name="docInstructionsTitle">ID Capture Tips</string>
+     <string name="docInstructions1">Place it within the box</string>
+     <string name="docInstructions2">Do not place outside</string>
+     <string name="docInstructions3">Avoid glare</string>
+     <string name="docInstructionsProceed">Proceed to Capture ID</string>
 
 
-     <string name="vnid_instruction">Place your National ID inside the Box</string>
-    <string name="dl_instruction">Place your Driving Licence inside the Box</string>
-    <string name="mrc_instruction">Place your MRC inside the Box</string>
-    <string name="eb_instruction">Place your Electricity Bill inside the Box</string>
-    <string name="bank_statement_instruction">Place your Bank Statement inside the Box</string>
-    <string name="insurance_instruction">Place your Insurance Receipt inside the Box</string>
-    <string name="passport_instruction">Place your Passport inside the Box</string>
+     <!--Face Capture Instruction Page -->
+     <string name="faceInstructionsTitle">Selfie Tips</string>
+     <string name="faceInstructionsTop1">Good lighting on your face</string>
+     <string name="faceInstructionsTop2">Hold phone in front of you</string>
+     <string name="faceInstructionsNoGlasses">No Glasses</string>
+     <string name="faceInstructionsBrightLight">Bright Light</string>
+     <string name="faceInstructionsNoHat">No Hat</string>
+     <string name="faceInstructionsProceed">Proceed to Take Selfie</string>
 
-    <string name="vnid_front_message">Vietnam National ID Front Side</string>
-    <string name="vnid_back_message">Vietnam National ID Back Side</string>
-    <string name="dl_front_message">Driving Licence Front Side</string>
-    <string name="dl_back_message">Driving Licence Back Side</string>
-    <string name="mrc_message">Motor Registration Certificate</string>
-    <string name="eb_message">Electricity Bill</string>
-    <string name="bank_statement_page_1_message">Bank Statement Page 1</string>
-    <string name="bank_statement_page_2_message">Bank Statement Page 2</string>
-    <string name="insurance_1_message">Insurance Receipt Page 1</string>
-    <string name="insurance_2_message">Insurance Receipt Page 2</string>
-    <string name="passport_message">Front Side of Passport</string>
+
 </resources>
