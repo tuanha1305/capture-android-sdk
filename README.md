@@ -221,17 +221,17 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
     - **strings.xml**:
       - **Face capture strings**:
           ```xml
-           <string name="faceCaptureTitle">Selfie Capture</string>
-          <string name="faceCaptureFaceNotFound">Place your face within circle</string>
-          <string name="faceCaptureFaceFound"> Capture Now </string>
-          <string name="faceCaptureMoveAway"> Move away from the phone</string>
-          <string name="faceCaptureActivity">Processing</string>
+             <string name="faceCaptureTitle">Selfie Capture</string>
+             <string name="faceCaptureFaceNotFound">Place your face within circle</string>
+             <string name="faceCaptureFaceFound"> Capture Now </string>
+             <string name="faceCaptureMoveAway"> Move away from the phone</string>
+             <string name="faceCaptureActivity">Processing</string>
           ```
       - **Document capture strings**:
         ```xml
-            <string name="docCaptureTitle">Docs capture</string>
-        <string name="docCaptureDescription">Make sure your document is without any glare and is fully inside</string>
-        <string name="docCaptureSubText">Front Side</string>
+	    <string name="docCaptureTitle">Docs capture</string>
+	    <string name="docCaptureDescription">Make sure your document is without any glare and is fully inside</string>
+	    <string name="docCaptureSubText">Front Side</string>
         ```  
       - **Face capture instruction strings**:
           ```xml
