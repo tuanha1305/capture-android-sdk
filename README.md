@@ -91,9 +91,8 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   ```
 	Where,
 	- appId, appKey are given by HyperVerge
-	- region: This is an enum, `HypeSnapParams.Region` with three values - `AsiaPacific`, `India` and `UnitedStates`.
+	- region: This is an enum, `HyperSnapParams.Region` with three values - `AsiaPacific`, `India` and `UnitedStates`.
 	- product: This is an enum, `HyperSnapParams.Product` with two values - `faceID` annd `faceIAM`. Right now, only `faceID` is supported.
->**Note**: This step is required only if liveness is used.
 
 ### 4. Launching the Activities
 
@@ -105,58 +104,62 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   hvDocConfig.setShouldShowReviewScreen(true);
   hvDocConfig.setShouldShowInstructionPage(true);
   hvDocConfig.setShouldShowFlashIcon(true);
+  hvDocConfig.setShouldAddPadding(true);
   hvDocConfig.setDocument(document);
   HVDocsActivity.start(context, hvDocConfig, myCaptureCompletionListener);
   ```
   where:
-  - **context** is the context of the current Activity being displayed
-  -  **myCaptureCompletionListener** is an object of `CaptureCompletionHandler` and has been described later
-  - **hvDocConfig** This is an object of type `HVDocConfig`. Its properties can be set with the setter methods provided for them. These are the various properties provided.
+  - **context**: is the context of the current Activity being displayed.
+  -  **myCaptureCompletionListener**: is an object of `CaptureCompletionHandler` and has been described  [later](#CaptureCompletionHandler).
+  - **hvDocConfig**: This is an object of type `HVDocConfig`. Its properties can be set with the setter methods provided for them. These are the various properties provided:
     - **setDocument**: (Document) Document is an enum of type   `HVDocConfig.Document`. It specifies the document type that needs to be captured.The parameter can be initialized as follows:
-    ```java
-      Document document = Document.CARD;
-      ```
-       where `aspectRatio` is a float specifying the aspectRatio of the document
-          
-      -Following are the types of documents supported by the Document enum:
-        - **CARD**: Aspect ratio : 0.625. Example: Vietnamese National ID, Driving License, Motor Registration Certificate
-        - **PASSPORT**: Aspect ratio: 0.67. Example: Passports
-        - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt
-        - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
-    
-      Also, Document supports the following customizations:
-      - **capturePageInstructionText**: The text displayed at the top section of the Camera Preview in HVDocsActivity.  It meant to tell the user about the document type. The text can be altered by calling following method:
         ```java
-        document.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
+        Document document = Document.CARD;
         ```
-      - **capturePageSubText**: The text displayed at the bottom end of the Camera Preview in HVDocsActivity. This is to communicate the positioning of the document to the user. The text can be altered by calling following method:
-        ```java
-        document.setCapturePageSubText("Front side");
+      - Following are the types of documents supported by the Document enum:
+
+          - **CARD**: Aspect ratio: 0.625. Example: Vietnamese National ID, Driving License, Motor Registration Certificate
+          - **PASSPORT**: Aspect ratio: 0.67. Example: Passports
+          - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt
+          - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
+    	    where `aspectRatio` is a float specifying the aspectRatio of the document.
+        - Also, Document supports the following customizations:
+      	    - **capturePageInstructionText**: The text displayed at the top section of the Camera Preview in HVDocsActivity. It meant to tell the user about the document type. The text can be altered by calling following method:
+        	    ```java
+        	    document.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
+        	    ```
+      	    - **capturePageSubText**: The text displayed at the bottom end of the Camera Preview in HVDocsActivity. This is to 	                  communicate the positioning of the document to the user. The text can be altered by calling following method:
+        	    ```java
+            	document.setCapturePageSubText("Front side");
+		        ```
     
-    - **setShouldShowReviewScreen** : (Boolean) To determine if the document review page should be shown after capture page. It defaults to `false`.
-    - **setShouldShowInstructionPage** : (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
-    - **setShouldShowFlashIcon** : (Boolean) Setting this to true will add a flash toggle button at the top right corner of the screen. It defaults to `false`.
-    -  `setCaptureScreenTitleText`, `setReviewScreenTitleText`, `setReviewScreenInstructionText` are properties which will allow to modify the strings shown in document capture activity and review screen activity.              
+    - **setShouldShowReviewScreen**: (Boolean) To determine if the document review page should be shown after capture page. It defaults to `false`.
+    - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
+    - **setShouldShowFlashIcon**: (Boolean) Setting this to true will add a flash toggle button at the top right corner of the screen. It defaults to `false`.
+    - **setShouldAddPadding**: (Boolean) Setting this to true will enable extra padding that will added to all images captured using the Document Capture activity. It defaults to `true`.
+    -  **setCaptureScreenTitleText**: (String) To set the title text that is shown in the document capture page. 
+    - **setReviewScreenTitleText**: (String) To set the title text that is shown in the Review screen after a document has been captured.
+    - **setReviewScreenInstructionText**: (String) To set the instruction text that is shown in the Review screen after a document has been captured.              
 
 #### For Face Capture
 For capturing face image, following method should be called:
   ```java
   HVFaceConfig hvFaceConfig = new HVFaceConfig();
   hvFaceConfig.setLivenessMode(LivenessMode.MODE);
-  hvFaceConfig.setFaceCaptureTitleText(" Face capture  ");
+  hvFaceConfig.setFaceCaptureTitleText("Face capture");
   HVFaceActivity.start(context, hvFaceConfig, myCaptureCompletionListener);
   ```
   where:
-  - **context** is the context of the current Activity being displayed
-  - **myCaptureCompletionListener** is an object of `CaptureCompletionHandler` and has been described later.
-  - **hvFaceConfig** This is an object of type `HVFaceConfig`. Its properties can be set with the setter methods provided for them. These are the various properties provided:.
-    - **setLivenessMode** Explained here.
+  - **context**: is the context of the current Activity being displayed
+  - **myCaptureCompletionListener**: is an object of `CaptureCompletionHandler` and has been described [later](#CaptureCompletionHandler).
+  - **hvFaceConfig**: This is an object of type `HVFaceConfig`. Its properties can be set with the setter methods provided for them. These are the various properties provided:
+    - **setLivenessMode**: (HVFaceConfig.LivenessMode) Explained [later](#Liveness-in-Face-Capture).
     - **setClientID**: (String) This is an optional parameter that could be sent with the liveness call.
     - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
-    - `setFaceCaptureTitleText` allows to modify the title text that is shown in HVFaceActivity.
+    - **setFaceCaptureTitleText**: (String) It allows to modify the title text that is shown in HVFaceActivity.
     
 #### CaptureCompletionHandler
-CaptureCompletionHandler is an interface whose object needs to be passed with start method of both FaceCaptureActivity and DocumentActivity. It has methods which has to be implemented by the object to handle both the responses of document capture and the errors that occured during capture. Following is a sample implementation of CaptureCompletionHandler:
+CaptureCompletionHandler is an interface whose object needs to be passed with start method of both HVFaceActivity and HVDocsActivity. It has methods which has to be implemented by the object to handle both the responses of document capture and the errors that occured during capture. Following is a sample implementation of CaptureCompletionHandler:
   ```java
   CaptureCompletionHandler myCaptureCompletionListener = new CaptureCompletionHandler() {
     @Override
@@ -179,20 +182,21 @@ The SDK has two liveness detection methods. Texture liveness and Gesture Livenes
 Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 values:
 
 **.none**: No liveness test is performed. The selfie that is captured is simply returned. If successful, the result JSON in the CaptureCompletionHandler has one key-value pair.
-- `imageUri` : local path of the image captured
+- `imageUri`: local path of the image captured
 
-**.textureLiveness** : Texture liveness test is performed on the selfie captured.  If successful, a result JSON with the following key-value pairs is returned in the CaptureCompletionHandler
+**.textureLiveness**: Texture liveness test is performed on the selfie captured.  If successful, a result JSON with the following key-value pairs is returned in the CaptureCompletionHandler.
 
-- `imageUri` : String. Local path of the image captured <br/>
+- `imageUri`: String. Local path of the image captured <br/>
 - `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not.
 - `liveness-score`: Float with values between 0 and 1.The  confidence score for the liveness prediction.
 - `to-be-reviewed`: String with values 'yes'/'no'. Yes indicates that it flagged for manual review.
 
 **.textureAndGestureLiveness**: In this mode, based on the results of the texture Liveness call, the user might be asked to do a series of gestures to confirm liveness. This mode is currently in beta. It is highly recommended to not use it in production.
-- `imageUri` : String. Local path of the image captured <br/>
+- `imageUri`: String. Local path of the image captured <br/>
 - `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not. This mode is currently in beta. It is highly recommended to not use it in production.
 
-  Following are the errors that can occur during capture process:
+
+Following are the errors that can occur during capture process:
 
 ## Error Codes
 Descriptions of the error codes returned in the CaptureCompletionHandler are given here. 
@@ -217,12 +221,18 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
     - **strings.xml**:
       - **Face capture strings**:
           ```xml
-           
+           <string name="faceCaptureTitle">Selfie Capture</string>
           <string name="faceCaptureFaceNotFound">Place your face within circle</string>
           <string name="faceCaptureFaceFound"> Capture Now </string>
           <string name="faceCaptureMoveAway"> Move away from the phone</string>
           <string name="faceCaptureActivity">Processing</string>
           ```
+      - **Document capture strings**:
+        ```xml
+            <string name="docCaptureTitle">Docs capture</string>
+        <string name="docCaptureDescription">Make sure your document is without any glare and is fully inside</string>
+        <string name="docCaptureSubText">Front Side</string>
+        ```  
       - **Face capture instruction strings**:
           ```xml
               <string name="faceInstructionsTitle">Selfie Tips</string>
@@ -266,7 +276,7 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
             ```
    
    - In order to customise font, border color, text size, text color different styles are used within the TextViews. The style names can be used in the parent app to change the properties.   
-   - Calligraphy library is used to load the fonts from assets folder.
+   - [Calligraphy](https://github.com/chrisjenx/Calligraphy) library is used to load the fonts from assets folder.
    - **styles.xml**:      
         - **The following style is used by all the title texts in the SDK.**
             ```xml

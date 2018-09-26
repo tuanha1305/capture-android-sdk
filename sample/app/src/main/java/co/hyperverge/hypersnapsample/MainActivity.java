@@ -232,7 +232,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         docConfig.setReviewScreenTitleText("Review your photo");
         docConfig.setShouldShowReviewScreen(true);
         docConfig.setShouldShowInstructionPage(true);
-
         if (view.getId() == R.id.tv_a4) {
             selectedDocument = HVDocConfig.Document.A4;
             docConfig.setCaptureScreenTitleText("Docs Capture");
