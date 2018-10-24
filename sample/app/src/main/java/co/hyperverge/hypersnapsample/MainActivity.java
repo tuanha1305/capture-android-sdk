@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
         HVFaceConfig config = new HVFaceConfig();
         config.setLivenessMode(mode);
-        config.setFaceCaptureTitleText(" Face capture  ");
+        config.setFaceCaptureTitle(" Face capture  ");
         config.setShouldShowInstructionPage(true);
         HVFaceActivity.start(MainActivity.this, config, new CaptureCompletionHandler() {
             @Override
@@ -228,41 +228,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         HVDocConfig docConfig = new HVDocConfig();
         docConfig.setShouldShowFlashIcon(false);
-        docConfig.setReviewScreenInstructionText("Is your document fully visible, glare free and not blurred ?");
-        docConfig.setReviewScreenTitleText("Review your photo");
+        docConfig.setDocReviewDescription("Is your document fully visible, glare free and not blurred ?");
+        docConfig.setDocReviewTitle("Review your photo");
+        docConfig.setDocCaptureTitle("Docs Capture");
+        docConfig.setDocCaptureDescription("Make sure your document is without any glare and is fully inside");
+        docConfig.setDocCaptureSubText("Front side");
         docConfig.setShouldShowReviewScreen(true);
         docConfig.setShouldShowInstructionPage(true);
         if (view.getId() == R.id.tv_a4) {
             selectedDocument = HVDocConfig.Document.A4;
-            docConfig.setCaptureScreenTitleText("Docs Capture");
-            selectedDocument.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
-            selectedDocument.setCapturePageSubText("Place your A4 document in the box");
-            docConfig.setDocument(selectedDocument);
+
+            docConfig.setDocumentType(selectedDocument);
             startAppropriateDocumentActivity(docConfig);
         }
         if (view.getId() == R.id.tv_card) {
             selectedDocument = HVDocConfig.Document.CARD;
-            docConfig.setCaptureScreenTitleText("Docs Capture");
-            selectedDocument.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
-            selectedDocument.setCapturePageSubText("Place your Card in the box");
-            docConfig.setDocument(selectedDocument);
+            docConfig.setDocumentType(selectedDocument);
             startAppropriateDocumentActivity(docConfig);
         }
         if (view.getId() == R.id.tv_other) {
             selectedDocument = HVDocConfig.Document.OTHER;
-            docConfig.setCaptureScreenTitleText("Docs Capture");
-            selectedDocument.setCapturePageInstructionText("Custom Document");
-            selectedDocument.setCapturePageSubText("Place your document in the box");
-//            selectedDocument.setAspectRatio(0.25f);
-            docConfig.setDocument(selectedDocument);
+            docConfig.setDocumentType(selectedDocument);
             startAppropriateDocumentActivity(docConfig);
         }
         if (view.getId() == R.id.tv_passport) {
             selectedDocument = HVDocConfig.Document.PASSPORT;
-            docConfig.setCaptureScreenTitleText("Docs Capture");
-            selectedDocument.setCapturePageInstructionText("Passport Front Side");
-            selectedDocument.setCapturePageSubText("Place your Passport in the box");
-            docConfig.setDocument(selectedDocument);
+            docConfig.setDocumentType(selectedDocument);
             startAppropriateDocumentActivity(docConfig);
         }
 

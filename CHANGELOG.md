@@ -1,3 +1,6 @@
+### Version 2.3.1
+- Issue fixes with native camera used in the SDK
+
 ### Version 2.3.0
 -  Added optional Instruction Pages for Face and Document Capture
 -  Added Review Page for Document capture

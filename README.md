@@ -54,7 +54,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.3.0@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.3.1@aar', {
           transitive=true
           exclude group: 'com.android.support'
       })
@@ -105,14 +105,16 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   hvDocConfig.setShouldShowInstructionPage(true);
   hvDocConfig.setShouldShowFlashIcon(true);
   hvDocConfig.setShouldAddPadding(true);
-  hvDocConfig.setDocument(document);
+  hvDocConfig.setDocumentType(document);
+  hvDocConfig.setDocCaptureDescription("Make sure your document is without any glare and is fully inside");
+  hvDocConfig.setDocCaptureSubText("Front side");
   HVDocsActivity.start(context, hvDocConfig, myCaptureCompletionListener);
   ```
   where:
   - **context**: is the context of the current Activity being displayed.
   -  **myCaptureCompletionListener**: is an object of `CaptureCompletionHandler` and has been described  [later](#CaptureCompletionHandler).
   - **hvDocConfig**: This is an object of type `HVDocConfig`. Its properties can be set with the setter methods provided for them. These are the various properties provided:
-    - **setDocument**: (Document) Document is an enum of type   `HVDocConfig.Document`. It specifies the document type that needs to be captured.The parameter can be initialized as follows:
+    - **setDocumentType**: (Document) Document is an enum of type   `HVDocConfig.Document`. It specifies the document type that needs to be captured.The parameter can be initialized as follows:
         ```java
         Document document = Document.CARD;
         ```
@@ -123,30 +125,25 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
           - **A4**: Aspect ratio: 1.4. Example: Bank statement, insurance receipt.
           - **OTHER**: This is for aspect ratios that don't fall in the above categories. In this case, the aspect ratio should be set in the next line by calling `document.setAspectRatio(aspectRatio);`
     	    where `aspectRatio` is a float specifying the aspectRatio of the document.
-        - Also, Document supports the following customizations:
-      	    - **capturePageInstructionText**: The text displayed at the top section of the Camera Preview in HVDocsActivity. This is to communicate the positioning of the document to the user. The text can be altered by calling following method:
-        	    ```java
-        	    document.setCapturePageInstructionText("Make sure your document is without any glare and is fully inside");
-        	    ```
-      	    - **capturePageSubText**: The text displayed at the bottom end of the Camera Preview in HVDocsActivity. It is meant to tell the user about the document type. The text can be altered by calling following method:
-        	    ```java
-            	document.setCapturePageSubText("Front side");
-		        ```
     
     - **setShouldShowReviewScreen**: (Boolean) To determine if the document review page should be shown after capture page. It defaults to `false`.
     - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
     - **setShouldShowFlashIcon**: (Boolean) Setting this to true will add a flash toggle button at the top right corner of the screen. It defaults to `false`.
     - **setShouldAddPadding**: (Boolean) Setting this to true will enable extra padding that will be added to all images captured using the Document Capture activity. It defaults to `true`.
-    -  **setCaptureScreenTitleText**: (String) To set the title text that is shown in the document capture page. 
-    - **setReviewScreenTitleText**: (String) To set the title text that is shown in the Review screen after a document has been captured.
-    - **setReviewScreenInstructionText**: (String) To set the instruction text that is shown in the Review screen after a document has been captured.              
+    -  **setDocCaptureTitle**: (String) To set the title text that is shown in the document capture page. 
+    - **setDocReviewTitle**: (String) To set the title text that is shown in the Review screen after a document has been captured.
+    - **setDocReviewDescription**: (String) To set the instruction text that is shown in the Review screen after a document has been captured.   
+     - **setDocCaptureDescription**: (String) The text displayed at the top section of the Camera Preview in HVDocsActivity. This is to communicate the positioning of the document to the user.
+     
+    - **setDocCaptureSubText**: (String) The text displayed at the bottom end of the Camera Preview in HVDocsActivity. It is meant to tell the user about the document type.
+        	  
 
 #### For Face Capture
 For capturing face image, following method should be called:
   ```java
   HVFaceConfig hvFaceConfig = new HVFaceConfig();
   hvFaceConfig.setLivenessMode(LivenessMode.MODE);
-  hvFaceConfig.setFaceCaptureTitleText("Face capture");
+  hvFaceConfig.setFaceCaptureTitle("Face capture");
   HVFaceActivity.start(context, hvFaceConfig, myCaptureCompletionListener);
   ```
   where:
@@ -156,7 +153,7 @@ For capturing face image, following method should be called:
     - **setLivenessMode**: (HVFaceConfig.LivenessMode) Explained [later](#Liveness-in-Face-Capture).
     - **setClientID**: (String) This is an optional parameter that could be sent with the liveness call.
     - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
-    - **setFaceCaptureTitleText**: (String) It allows to modify the title text that is shown in HVFaceActivity.
+    - **setFaceCaptureTitle**: (String) It allows to modify the title text that is shown in HVFaceActivity.
     
 #### CaptureCompletionHandler
 CaptureCompletionHandler is an interface whose object needs to be passed with start method of both HVFaceActivity and HVDocsActivity. It has methods which has to be implemented by the object to handle both the responses of document capture and the errors that occured during capture. Following is a sample implementation of CaptureCompletionHandler:
@@ -192,8 +189,7 @@ Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 valu
 - `to-be-reviewed`: String with values 'yes'/'no'. Yes indicates that it flagged for manual review.
 
 **.textureAndGestureLiveness**: In this mode, based on the results of the texture Liveness call, the user might be asked to do a series of gestures to confirm liveness. This mode is currently in beta. It is highly recommended to not use it in production.
-- `imageUri`: String. Local path of the image captured.
-- `live`: String with values 'yes'/'no'. Tells whether the selfie is live or not. This mode is currently in beta. It is highly recommended to not use it in production.
+
 
 
 Following are the errors that can occur during capture process:
@@ -254,7 +250,7 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
              <string name="docInstructions3">Avoid glare</string>
         ```
       
-       - **Document capture review page strings**:
+      - **Document capture review page strings**:
            ```xml
               <string name="docReviewRetakeButton">Retake</string>
               <string name="docReviewContinueButton">Use This Photo</string>
@@ -297,18 +293,7 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
                 </style>
             
             ```
-        - **The following style is used by the sub text that is displayed in the document capture screen.**
-           ```xml
-                 <style name="TextviewShadow">
-                     <item name="android:textSize">16sp</item>
-                     <item name="fontPath">Roboto-Medium.ttf</item>
-                     <item name="android:textColor">@color/white </item>
-                     <item name="android:shadowColor">@color/shadow_color</item>
-                     <item name="android:shadowDy">2</item>
-                     <item name="android:shadowRadius">4</item>
-                 </style>   
-                    
-             ```
+
         - **The following style is used by the sub text that is displayed in the document capture screen.**
            ```xml
                  <style name="TextviewShadow">
