@@ -54,7 +54,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.3.1@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.3.2@aar', {
           transitive=true
           exclude group: 'com.android.support'
       })
@@ -81,6 +81,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 -  The app requires the following permissions to work.
     - *Camera*
     - *Autofocus*
+    - *Fine Location* (Optional - If geo-tagging data has to be encoded with the images captured )
 
     Kindly note that for android v23 (Marshmallow) and above, you need to handle the runtime permissions inside your app.
 
@@ -326,7 +327,22 @@ Descriptions of the error codes returned in the CaptureCompletionHandler are giv
                </style>
                             
             ```
-           
+### EXIF Data
+Both Face and Document images returned by the SDK have EXIF data stored in them.
+If the app has permissions to access location, the EXIF data would also contain the 'GPS' data of the image.
+Please note that, if GPS data is needed, location permissions should be handled by the app before launching the SDK.
+
+To get the EXIF data, use the following code on the `imageUri` returned by the SDK
+ ```
+	  ExifInterface outFile = new ExifInterface(imageUri);
+      String gpsLongitude = outFile.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
+	  String gpsLatitude  = outFile.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+      String make = outFile.getAttribute(ExifInterface.TAG_MAKE);
+      String model = outFile.getAttribute(ExifInterface.TAG_MODEL);
+	  String flash = outFile.getAttribute(ExifInterface.TAG_FLASH);
+	  String focalLength = outFile.getAttribute(ExifInterface.TAG_FOCAL_LENGTH);
+
+ ```           
 
 ## Contact Us
 If you are interested in integrating this SDK, please do send us a mail at [contact@hyperverge.co](mailto:contact@hyperverge.co) explaining your use case. We will give you the `aws_access_key` & `aws_secret_pass` so that you can try it out. Learn more about HyperVerge [here](http://hyperverge.co/).

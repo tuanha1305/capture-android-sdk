@@ -1,3 +1,7 @@
+### Version 2.3.2
+- Added mixpanel support with the SDK
+- Added exif parameters for all images captured using the SDK
+
 ### Version 2.3.1
 - Issue fixes with native camera used in the SDK
 

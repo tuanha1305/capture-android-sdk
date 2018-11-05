@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_passport).setOnClickListener(this);
         findViewById(R.id.tv_face).setOnClickListener(this);
         ((RadioGroup) (findViewById(R.id.face_value))).setOnCheckedChangeListener(this);
-        getPermissions();
+        PermissionManager manager = new PermissionManager();
+        manager.checkAndRequestPermissions(this);
     }
 
     @Override
