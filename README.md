@@ -30,10 +30,11 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 		- [For Document Capture](#for-document-capture)
 		- [For Face Capture](#for-face-capture)
 		- [CaptureCompletionHandler](#capturecompletionhandler)
-		- [Liveness in Face Capture:](#liveness-in-face-capture)
+		- [Liveness in Face Capture](#liveness-in-face-capture)
 - [API Calls](#api-calls)		
      - [OCR API Call](#ocr-api-call)
      - [Face Match Call](#face-match-call)
+     - [APICompletionCallback](#apicompletioncallback)
 - [Error Codes](#error-codes)
 - [Advanced](#advanced)
 	- [Customizations](#customizations)
@@ -58,7 +59,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.3.3@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.3.4@aar', {
           transitive=true
           exclude group: 'com.android.support'
       })
@@ -212,7 +213,7 @@ Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 valu
         - For Vietnam KYC please check out the documentation [here](https://github.com/hyperverge/kyc-vietnam-rest-api)
    - **parameters**: (JSONObject) This is usually an empty JSON Object. If you want HyperVerge to temporarily store the image for debugging purposes, please set "outputImageUrl" to "yes". Find more details [here](https://github.com/hyperverge/kyc-india-rest-api#optional-parameters).
    - **documentUri**: (String) The `imageUri` received in the completionHandler after Document Capture.
-   - **completionCallback**: (CompletionHandler) This is an interface which is used to return the results back after making the network request.Explained [here](#completioncallback).     
+   - **completionCallback**: (APICompletionCallback) This is an interface which is used to return the results back after making the network request.Explained [here](#apicompletioncallback).     
        
 ### Face Match Call
  To make Face ID match call directly from the App, use the following method:
@@ -234,27 +235,37 @@ For more information, please check out the documentation [here](https://github.c
 	
    * **faceUri**: (String) The `imageUri` received in the CompletionHandler after Face Capture.
    * **documentUri**: (String) The `imageUri` received in the completionHandler after Document Capture.
-   * **completionCallback**: (CompletionHandler) This is an interface which is used to return the results back after making the network request. Explained [here](#completioncallback).     
+   * **completionCallback**: (APICompletionCallback) This is an interface which is used to return the results back after making the network request. Explained [here](#apicompletioncallback).     
          
 
-#### CompletionCallback
-CompletionCallback is an interface whose object needs to be passed with 'makeOCRCall' or 'makeFaceMatchCall'. It has one `onResult` method that contains the error or result obtained in the process.
+#### APICompletionCallback
+APICompletionCallback is an interface whose object needs to be passed with 'makeOCRCall' or 'makeFaceMatchCall'. It has one `onResult` method that contains the error or result obtained in the process. 
 
-Following is a sample implementation of CompletionCallback:
+Following is a sample implementation of APICompletionCallback:
   ```java
-  CompletionCallback completionCallback = new CompletionCallback() {
+  APICompletionCallback completionCallback = new APICompletionCallback() {
     @Override
-    public void onResult(Error error, JSONObject result) {
+    public void onResult(JSONObject error, JSONObject result) {
         if(error != null) {
-            Log.e("Log", error.getError() + " :: " + error.getErrMsg());
+            Log.e("Log", error.toString());
         }
         else{
             Log.i("Log", result.toString());
-          
         }
     }
   }
   ```  
+  Where,
+  
+ - **result**: The result JSONObject is the entire result obtained by the API without any modification.
+ 
+ - **error**: The error JSONObject two key-value pairs.
+ 	- 'error' : Error message
+	- 'statusCode' : ErrorCode(if error is returned by SDK) or StatusCode(if error is returned by the server).
+	
+**Errors Returned by the SDK**: Network Error(102), Initialization Error(101) and Internal SDK Error(2).<br/>
+
+**Errors Returned by the Server**: For error messages and status codes returned by the server, please refer to the corresponding API documentation.
 
 
 ## Error Codes
@@ -407,4 +418,4 @@ To get the EXIF data, use the following code on the `imageUri` returned by the S
  ```           
 
 ## Contact Us
-If you are interested in integrating this SDK, please do send us a mail at [contact@hyperverge.co](mailto:contact@hyperverge.co) explaining your use case. We will give you the `aws_access_key` & `aws_secret_pass` so that you can try it out. Learn more about HyperVerge [here](http://hyperverge.co/).
+If you are interested in integrating this SDK, please contact us at [contact@hyperverge.co](mailto:contact@hyperverge.co). Learn more about HyperVerge [here](http://hyperverge.co/).
