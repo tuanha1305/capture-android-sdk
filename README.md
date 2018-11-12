@@ -1,3 +1,4 @@
+
 ## HyperSnapSDK Documentation for Android
 
 ## Overview
@@ -6,9 +7,9 @@ HyperSnapSDK is HyperVerge's documents + face capture SDK that captures images a
 
 The framework provides a liveness feature that uses our advanced AI Engines to differentiate between a real user capturing his/her selfie from a photo/video recording.
 
-### Requirements
-- Gradle Version: 4.1 (Recommended)
-- Tested with Gradle Plugin for Android Studio - version 3.0.1
+### Specifications
+- Gradle Version 4.1 (Recommended)
+- Tested with Gradle Plugin for Android Studio - version 3.1.0
 - minSdkVersion 19
 - targetSdkVersion 26
 
@@ -17,7 +18,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 
 ## Table Of Contents
 - [Overview](#overview)
-	- [Requirements](#requirements)
+	- [Specifications](#specifications)
     - [ChangeLog](#changelog)
 - [Table Of Contents](#table-of-contents)
 - [Example Project](#example-project)
@@ -30,6 +31,9 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 		- [For Face Capture](#for-face-capture)
 		- [CaptureCompletionHandler](#capturecompletionhandler)
 		- [Liveness in Face Capture:](#liveness-in-face-capture)
+- [API Calls](#api-calls)		
+     - [OCR API Call](#ocr-api-call)
+     - [Face Match Call](#face-match-call)
 - [Error Codes](#error-codes)
 - [Advanced](#advanced)
 	- [Customizations](#customizations)
@@ -54,7 +58,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.3.2@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.3.3@aar', {
           transitive=true
           exclude group: 'com.android.support'
       })
@@ -155,13 +159,14 @@ For capturing face image, following method should be called:
     - **setClientID**: (String) This is an optional parameter that could be sent with the liveness call.
     - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
     - **setFaceCaptureTitle**: (String) It allows to modify the title text that is shown in HVFaceActivity.
-    
+    - **enableDataLogging**: (Boolean) This will allow Hyperverge to log the data to facilitate easy debugging and analysis. It defaults to `false`. 
+
 #### CaptureCompletionHandler
 CaptureCompletionHandler is an interface whose object needs to be passed with start method of both HVFaceActivity and HVDocsActivity. It has methods which has to be implemented by the object to handle both the responses of document capture and the errors that occured during capture. Following is a sample implementation of CaptureCompletionHandler:
   ```java
   CaptureCompletionHandler myCaptureCompletionListener = new CaptureCompletionHandler() {
     @Override
-    public void onResult(CaptureError error, JSONObject result) {
+    public void onResult(Error error, JSONObject result) {
         if(error != null) {
             Log.e("LandingActivity", error.getError() + " :: " + error.getErrMsg());
         }
@@ -173,8 +178,9 @@ CaptureCompletionHandler is an interface whose object needs to be passed with st
     }
   }
   ```
+  
 
-#### Liveness in Face Capture:
+#### Liveness in Face Capture
 The SDK has two liveness detection methods. Texture liveness and Gesture Liveness. This can be set using the `livenessMode` parameter in the `setLivenessMode` method of `HVFaceConfig` discussed earlier.
 
 Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 values:
@@ -193,10 +199,66 @@ Here, `livenessMode` is of type `HVFaceConfig.LivenessMode`, an enum with 3 valu
 
 
 
-Following are the errors that can occur during capture process:
+## API Calls 
+
+### OCR API Call
+ To make OCR API calls directly from the App, use the following method:
+ ```java
+    HVNetworkHelper.makeOCRCall(endpoint, documentUri, parameters, completionCallback)
+ ```
+ where:
+   - **endpoint**: (String) Please check out the links given below.
+        - For India KYC please check out the documentation [here](https://github.com/hyperverge/kyc-india-rest-api)
+        - For Vietnam KYC please check out the documentation [here](https://github.com/hyperverge/kyc-vietnam-rest-api)
+   - **parameters**: (JSONObject) This is usually an empty JSON Object. If you want HyperVerge to temporarily store the image for debugging purposes, please set "outputImageUrl" to "yes". Find more details [here](https://github.com/hyperverge/kyc-india-rest-api#optional-parameters).
+   - **documentUri**: (String) The `imageUri` received in the completionHandler after Document Capture.
+   - **completionCallback**: (CompletionHandler) This is an interface which is used to return the results back after making the network request.Explained [here](#completioncallback).     
+       
+### Face Match Call
+ To make Face ID match call directly from the App, use the following method:
+  ```java
+     HVNetworkHelper.makeFaceMatchCall(endPoint, faceUri, documentUri, parameters, completionCallback)
+  ``` 
+  
+  where:
+   * **endpoint**: (String) 
+   
+	   *	India: "https://ind.faceid.hyperverge.co/v1/photo/verifyPair"
+		* Asia Pacific: "https://apac.faceid.hyperverge.co/v1/photo/verifyPair"
+   	
+For more information, please check out the documentation [here](https://github.com/hyperverge/face-match-rest-api)
+   * **parameters**: (JSONObject)
+	   * *type*: (required)For document to selfie match, please set "type" to "id". For selfie to selfie match, set "type" to "selfie".
+		* *dataLogging*: (optional)If you want HyperVerge to store your image for debugging purpose, set "dataLogging" to "yes".
+		* *clientId*: (optional) This is a unique identifier that is assigned to the end customer by the API user. It would be the same for the different API calls made for the same customer. This would facilitate better analysis of user flow etc.
+	
+   * **faceUri**: (String) The `imageUri` received in the CompletionHandler after Face Capture.
+   * **documentUri**: (String) The `imageUri` received in the completionHandler after Document Capture.
+   * **completionCallback**: (CompletionHandler) This is an interface which is used to return the results back after making the network request. Explained [here](#completioncallback).     
+         
+
+#### CompletionCallback
+CompletionCallback is an interface whose object needs to be passed with 'makeOCRCall' or 'makeFaceMatchCall'. It has one `onResult` method that contains the error or result obtained in the process.
+
+Following is a sample implementation of CompletionCallback:
+  ```java
+  CompletionCallback completionCallback = new CompletionCallback() {
+    @Override
+    public void onResult(Error error, JSONObject result) {
+        if(error != null) {
+            Log.e("Log", error.getError() + " :: " + error.getErrMsg());
+        }
+        else{
+            Log.i("Log", result.toString());
+          
+        }
+    }
+  }
+  ```  
+
 
 ## Error Codes
-Descriptions of the error codes returned in the CaptureCompletionHandler are given here. 
+Descriptions of the error codes returned in the CaptureCompletionHandler and CompletionCallback are given here. 
 
 
 |Description|Explanation|Action|

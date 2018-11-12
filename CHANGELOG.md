@@ -1,3 +1,6 @@
+### Version 2.3.3
+- Added HVNetworkHelper to make network requests within the app.
+
 ### Version 2.3.2
 - Added mixpanel support with the SDK
 - Added exif parameters for all images captured using the SDK

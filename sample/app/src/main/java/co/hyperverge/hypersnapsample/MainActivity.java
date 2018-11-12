@@ -31,10 +31,12 @@ import co.hyperverge.hypersnapsdk.R;
 import co.hyperverge.hypersnapsdk.activities.HVDocsActivity;
 import co.hyperverge.hypersnapsdk.activities.HVFaceActivity;
 import co.hyperverge.hypersnapsdk.listeners.CaptureCompletionHandler;
+import co.hyperverge.hypersnapsdk.listeners.CompletionCallback;
+import co.hyperverge.hypersnapsdk.network.HVNetworkHelper;
 import co.hyperverge.hypersnapsdk.objects.Error;
 import co.hyperverge.hypersnapsdk.objects.HVDocConfig;
 import co.hyperverge.hypersnapsdk.objects.HVFaceConfig;
-import co.hyperverge.hypersnapsdk.objects.HyperSnapParams;
+
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
@@ -153,6 +155,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     resultView.setText("RESULT: " + result.toString());
                     try {
+                        HVNetworkHelper.makeOCRCall("https://ind.docs.hyperverge.co/v1-1/readPassport", result.getString("imageUri"), new JSONObject(), new CompletionCallback() {
+                            @Override
+                            public void onResult(Error error, JSONObject result) {
+                                if(error!= null)
+                                    resultView.setText("RESULT: " + error.getErrMsg());
+                                if(result != null) {
+                                    resultView.setText("RESULT: " + result.toString());
+                                }
+                            }
+                        });
                         Glide.with(MainActivity.this).load(result.getString("imageUri")).into((ImageView) findViewById(R.id.iv_result));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -190,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          * HVFaceConfig is the configuration class to set parameters for HVFaceActivity
          */
         HVFaceConfig config = new HVFaceConfig();
-        config.setLivenessMode(mode);
+        // config.setLivenessMode(mode);
         config.setFaceCaptureTitle(" Face capture  ");
         config.setShouldShowInstructionPage(true);
         HVFaceActivity.start(MainActivity.this, config, new CaptureCompletionHandler() {
