@@ -1,3 +1,14 @@
+### Version 2.4.1
+- Minor SDK size optimisation changes
+
+### Version 2.4.0
+- Added headers support in makeOCRCall and makeFaceMatchCall
+- Changed Error enum to HVError Object
+- Changed error structure to return server errors directly
+- Added camera permission handling in the SDK
+- Fixed bug with document padding
+
+
 ### Version 2.3.4
 - Minor bug fix in HVNetworkHelper
 - Added support for error codes for API calls
@@ -16,7 +27,7 @@
 -  Added optional Instruction Pages for Face and Document Capture
 -  Added Review Page for Document capture
 -  Added provision for style customisation for all prominent labels and buttons
--  Added customisation options for strings and colors used in the SDK 
+-  Added customisation options for strings and colors used in the SDK
 -  Added optional 'clientID' field to liveness calls
 
 ### Version 2.2.0
@@ -49,22 +60,3 @@
 
 ### Version 1.0.4
 - DocumentActivity returning image path with improper extension
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
