@@ -1,3 +1,10 @@
+### Version 2.4.3
+- Camera improvements to improve the picture quality.
+ 
+### Version 2.4.2
+- Liveness URL can be now be configured 
+- Optional Camera Flip button added for Face capture
+- Bug fix w.r.t permission handling 
 ### Version 2.4.1
 - Minor SDK size optimisation changes
 
