@@ -61,7 +61,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	  }
   }
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.4.1@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.4.3@aar', {
           transitive=true
           exclude group: 'com.android.support'
           exclude group: 'com.google.android.gms'
