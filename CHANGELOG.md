@@ -1,3 +1,14 @@
+### Version 2.4.6
+- Added QR scanner module
+- Added helper method to make validation API call
+
+### Version 2.4.5
+- SDK Size optimisation
+
+### Version 2.4.4
+- Added setter methods to set custom strings for all texts shown
+- Bug fixes
+
 ### Version 2.4.3
 - Camera improvements to improve the picture quality.
  
