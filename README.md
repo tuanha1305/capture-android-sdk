@@ -60,7 +60,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 
   ```groovy
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.4.6@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.4.6.1@aar', {
           transitive=true
           exclude group: 'com.android.support'
           exclude group: 'com.google.android.gms
