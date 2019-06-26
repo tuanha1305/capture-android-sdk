@@ -60,18 +60,20 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 
   ```groovy
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.4.6.1@aar', {
+      implementation('co.hyperverge:hypersnapsdk:2.4.7.4@aar', {
           transitive=true
           exclude group: 'com.android.support'
           exclude group: 'com.google.android.gms
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-instructions'
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-qrscanner'
+          exclude group: 'co.hyperverge', module: 'hypersnap-pdfconverter'
       })
   }
   ```
   Please note:
   1. If you would like to use the instructions module, please remove the exclude statement for `hypersnapsdk-instructions`
-  2. If you would like to use the QR Scannner module, please remove the exclude statement for `hypersnapsdk-qrscanner`
+  2. To use the QR Scannner module, please remove the exclude statement for `hypersnapsdk-qrscanner`
+  3. To get PDF versions of the captured documents, please remove the exclude statement for `hypersnap-pdfconverter`
 
 - Add the following set of lines to the Project (top-level) `build.gradle`
 
@@ -99,10 +101,12 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 	  }    
     }
   ```
+- (Optional) We recommend installing Android NDK in the system generating the final APK. This is to ensure a low size footprint. Learn more about NDK [here](https://developer.android.com/ndk).
 
 ### 2. Update Proguard File
   If you have a proguard file, add the following to it:
   ```
+  -dontwarn  co.hyperverge.**
   -keepclassmembers class * implements javax.net.ssl.SSLSocketFactory {
          private javax.net.ssl.SSLSocketFactory delegate;
     }
