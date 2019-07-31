@@ -1,3 +1,12 @@
+### Version 2.4.8
+- Added support for x86_64
+- Bug fixes
+
+### Version 2.4.7
+- Added provision for selfie-selfie match API call
+- Added optional PDF response to document capture
+- Bug fixes
+
 ### Version 2.4.6
 - Added QR scanner module
 - Added helper method to make validation API call
