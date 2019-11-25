@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId "co.hyperverge.hypersnapsample"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -18,7 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.0'
 }
 
 dependencies {
@@ -26,14 +26,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile ('co.hyperverge:hypersnapsdk:2.4.3@aar', {
+    compile ('co.hyperverge:hypersnapsdk:3.0.0@aar', {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.google.android.gms'
 
     })
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
     testCompile 'junit:junit:4.12'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'

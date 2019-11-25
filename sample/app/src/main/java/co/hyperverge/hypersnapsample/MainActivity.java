@@ -3,7 +3,6 @@ package co.hyperverge.hypersnapsample;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -21,13 +20,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Locale;
 
-import co.hyperverge.hypersnapsdk.R;
 import co.hyperverge.hypersnapsdk.activities.HVDocsActivity;
 import co.hyperverge.hypersnapsdk.activities.HVFaceActivity;
-import co.hyperverge.hypersnapsdk.listeners.APICompletionCallback;
 import co.hyperverge.hypersnapsdk.listeners.DocCaptureCompletionHandler;
 import co.hyperverge.hypersnapsdk.listeners.FaceCaptureCompletionHandler;
-import co.hyperverge.hypersnapsdk.network.HVNetworkHelper;
 import co.hyperverge.hypersnapsdk.objects.HVDocConfig;
 import co.hyperverge.hypersnapsdk.objects.HVError;
 import co.hyperverge.hypersnapsdk.objects.HVFaceConfig;
