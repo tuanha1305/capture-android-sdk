@@ -63,7 +63,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   dependencies {
       implementation('co.hyperverge:hypersnapsdk:3.0.0@aar', {
           transitive=true
-          exclude group: 'com.google.android.gms // add this if you don\'t need location data on EXIF
+          exclude group: 'com.google.android.gms // add this if you don't need location data on EXIF
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-instructions'
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-qrscanner'
           exclude group: 'co.hyperverge', module: 'hypersnap-pdfconverter'
