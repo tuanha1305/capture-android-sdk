@@ -3,10 +3,12 @@ package co.hyperverge.hypersnapsample;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.Handler;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Locale;
@@ -32,6 +35,7 @@ import co.hyperverge.hypersnapsdk.objects.HVFaceConfig;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
+    private static final String TAG = MainActivity.class.getCanonicalName();
     /**
      * Document and Liveness have been moved to their respective parent configuration classes.
      */
@@ -176,6 +180,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void extractExifData(String imageUri) {
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imageUri);
+
+            String make = exif.getAttribute(ExifInterface.TAG_MAKE);
+            String model = exif.getAttribute(ExifInterface.TAG_MODEL);
+            String flash = exif.getAttribute(ExifInterface.TAG_FLASH);
+            String focalLength = exif.getAttribute(ExifInterface.TAG_FOCAL_LENGTH);
+
+            extractLocationData(exif);
+
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    private void extractLocationData(ExifInterface exifInterface) {
+        float[] latLong = new float[2];
+        float latitude = 0;
+        float longitude = 0;
+        boolean hasLatLong = exifInterface.getLatLong(latLong);
+
+        if (hasLatLong) {
+            latitude = latLong[0];
+            longitude = latLong[1];
+        } else {
+            Log.w(TAG, "No latitude and longitude present in the image");
+        }
+    }
 
 
     @Override
