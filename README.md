@@ -16,7 +16,8 @@ The framework also includes optional Instructions pages for Document and Face ca
 - Gradle Version 4.1 (Recommended)
 - Tested with Gradle Plugin for Android Studio - version 3.1.0
 - minSdkVersion 19
-- targetSdkVersion 26
+- targetSdkVersion 28
+- compileSdkVersion 28
 
 ### ChangeLog
 You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
@@ -60,10 +61,9 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 
   ```groovy
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:2.4.8@aar', {
+      implementation('co.hyperverge:hypersnapsdk:3.0.0@aar', {
           transitive=true
-          exclude group: 'com.android.support'
-          exclude group: 'com.google.android.gms
+          exclude group: 'com.google.android.gms // add this if you don\'t need location data on EXIF
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-instructions'
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-qrscanner'
           exclude group: 'co.hyperverge', module: 'hypersnap-pdfconverter'
@@ -74,6 +74,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   1. If you would like to use the instructions module, please remove the exclude statement for `hypersnapsdk-instructions`
   2. To use the QR Scannner module, please remove the exclude statement for `hypersnapsdk-qrscanner`
   3. To get PDF versions of the captured documents, please remove the exclude statement for `hypersnap-pdfconverter`
+  4. If your app is still compiling at Android versions below 28, please replace 'co.hyperverge:hypersnapsdk:3.0.0@aar' with 'co.hyperverge:hypersnapsdk:2.5.16@aar'. Although HyperSnap v2.5.16 supports apps compiling at Android versions 26 and 27, it is being deprecated in the coming months. There will be only bug fixes and no new features added to this version. Please contact HyperVerge for more details.
 
 - Add the following set of lines to the Project (top-level) `build.gradle`
 
@@ -521,13 +522,24 @@ Please note that, if GPS data is needed, location permissions should be handled 
 
 To get the EXIF data, use the following code on the `imageUri` returned by the SDK
  ```
-	  ExifInterface outFile = new ExifInterface(imageUri);
-      String gpsLongitude = outFile.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-	  String gpsLatitude  = outFile.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-      String make = outFile.getAttribute(ExifInterface.TAG_MAKE);
-      String model = outFile.getAttribute(ExifInterface.TAG_MODEL);
-	  String flash = outFile.getAttribute(ExifInterface.TAG_FLASH);
-	  String focalLength = outFile.getAttribute(ExifInterface.TAG_FOCAL_LENGTH);
+	  private void getLocationDataFrom(String imageUri) {
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imageUri);
+            float[] latLong = new float[2];
+            float latitude = 0;
+            float longitude = 0;
+            boolean hasLatLong = exif.getLatLong(latLong);
+            if (hasLatLong) {
+                latitude = latLong[0];
+                longitude = latLong[1];
+            } else {
+                Log.w(TAG, "No latitude and longitude present in the image");
+            }
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
  ```           
 
 ## Contact Us
