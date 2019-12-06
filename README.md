@@ -522,7 +522,7 @@ Please note that, if GPS data is needed, location permissions should be handled 
 
 To get the EXIF data, use the following code on the `imageUri` returned by the SDK
  ```
-	  private void getLocationDataFrom(String imageUri) {
+    private void getLocationDataFrom(String imageUri) {
         ExifInterface exif = null;
         try {
             exif = new ExifInterface(imageUri);
