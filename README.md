@@ -522,22 +522,34 @@ Please note that, if GPS data is needed, location permissions should be handled 
 
 To get the EXIF data, use the following code on the `imageUri` returned by the SDK
  ```
-    private void getLocationDataFrom(String imageUri) {
+    private void extractExifData(String imageUri) {
         ExifInterface exif = null;
         try {
             exif = new ExifInterface(imageUri);
-            float[] latLong = new float[2];
-            float latitude = 0;
-            float longitude = 0;
-            boolean hasLatLong = exif.getLatLong(latLong);
-            if (hasLatLong) {
-                latitude = latLong[0];
-                longitude = latLong[1];
-            } else {
-                Log.w(TAG, "No latitude and longitude present in the image");
-            }
+
+            String make = exif.getAttribute(ExifInterface.TAG_MAKE);
+            String model = exif.getAttribute(ExifInterface.TAG_MODEL);
+            String flash = exif.getAttribute(ExifInterface.TAG_FLASH);
+            String focalLength = exif.getAttribute(ExifInterface.TAG_FOCAL_LENGTH);
+
+            extractLocationData(exif);
+
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
+        }
+    }
+
+    private void extractLocationData(ExifInterface exifInterface) {
+        float[] latLong = new float[2];
+        float latitude = 0;
+        float longitude = 0;
+        boolean hasLatLong = exifInterface.getLatLong(latLong);
+
+        if (hasLatLong) {
+            latitude = latLong[0];
+            longitude = latLong[1];
+        } else {
+            Log.w(TAG, "No latitude and longitude present in the image");
         }
     }
  ```           

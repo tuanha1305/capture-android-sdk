@@ -178,38 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.tv_face) {
             startFaceCaptureActivity();
         }
-    }
-
-    private void extractExifData(String imageUri) {
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(imageUri);
-
-            String make = exif.getAttribute(ExifInterface.TAG_MAKE);
-            String model = exif.getAttribute(ExifInterface.TAG_MODEL);
-            String flash = exif.getAttribute(ExifInterface.TAG_FLASH);
-            String focalLength = exif.getAttribute(ExifInterface.TAG_FOCAL_LENGTH);
-
-            extractLocationData(exif);
-
-        } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
-        }
-    }
-
-    private void extractLocationData(ExifInterface exifInterface) {
-        float[] latLong = new float[2];
-        float latitude = 0;
-        float longitude = 0;
-        boolean hasLatLong = exifInterface.getLatLong(latLong);
-
-        if (hasLatLong) {
-            latitude = latLong[0];
-            longitude = latLong[1];
-        } else {
-            Log.w(TAG, "No latitude and longitude present in the image");
-        }
-    }
+      }
 
 
     @Override
