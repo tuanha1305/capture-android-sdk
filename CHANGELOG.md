@@ -1,3 +1,28 @@
+### Version 2.5.16
+- Minor bug fixes for Document and Face capture screens
+
+### Version 2.5.15
+- Minor Bug fixes
+
+### Version 2.5.14
+- Bug fix for Document Capture screen in Andriod 10 devices
+
+### Version 2.5.13
+- Security improvements
+
+### Version 2.5.12
+- Added precise location exif data from FusedLocationProvider using Google location APIs
+
+### Version 2.5.11
+- Added custom colors for face circle - Override face_capture_circle_success to change the color when face is detected successfully and face_capture_circle_failure to change the color when face is not detected or face is detected with errors in colors.xml
+
+### Version 2.5.10
+- Converted all png images to vector images - results in significant reduction in SDK size
+
+### Version 2.5.8
+- Fix blur issues in Honor N9 and Vivo 1814 phones
+- Add sentry for logging crashes and errors
+
 ### Version 2.4.8
 - Added support for x86_64
 - Bug fixes
@@ -25,6 +50,7 @@
 - Liveness URL can be now be configured 
 - Optional Camera Flip button added for Face capture
 - Bug fix w.r.t permission handling 
+
 ### Version 2.4.1
 - Minor SDK size optimisation changes
 
