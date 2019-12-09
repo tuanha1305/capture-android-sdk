@@ -1,3 +1,6 @@
+### Version 3.0.0
+- SDK is compiled at Android version 28. This version of the SDK supports 'android.support' and 'androidx' libraries. This version is recommended for projects compiling at Android 28 and above.
+
 ### Version 2.5.16
 - Minor bug fixes for Document and Face capture screens
 
