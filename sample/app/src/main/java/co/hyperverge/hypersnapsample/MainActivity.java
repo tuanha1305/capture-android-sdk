@@ -3,11 +3,12 @@ package co.hyperverge.hypersnapsample;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.Handler;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -17,17 +18,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Locale;
 
-import co.hyperverge.hypersnapsdk.R;
 import co.hyperverge.hypersnapsdk.activities.HVDocsActivity;
 import co.hyperverge.hypersnapsdk.activities.HVFaceActivity;
-import co.hyperverge.hypersnapsdk.listeners.APICompletionCallback;
 import co.hyperverge.hypersnapsdk.listeners.DocCaptureCompletionHandler;
 import co.hyperverge.hypersnapsdk.listeners.FaceCaptureCompletionHandler;
-import co.hyperverge.hypersnapsdk.network.HVNetworkHelper;
 import co.hyperverge.hypersnapsdk.objects.HVDocConfig;
 import co.hyperverge.hypersnapsdk.objects.HVError;
 import co.hyperverge.hypersnapsdk.objects.HVFaceConfig;
@@ -36,6 +35,7 @@ import co.hyperverge.hypersnapsdk.objects.HVFaceConfig;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
+    private static final String TAG = MainActivity.class.getCanonicalName();
     /**
      * Document and Liveness have been moved to their respective parent configuration classes.
      */
@@ -178,8 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.tv_face) {
             startFaceCaptureActivity();
         }
-    }
-
+      }
 
 
     @Override
