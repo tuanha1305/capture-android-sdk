@@ -1,3 +1,6 @@
+### Version 3.1.0
+- Removed Chrisjenx's Caligraphy library. SDK now uses Android's Downloadable Fonts features to render fonts.
+
 ### Version 3.0.1
 - Bug fixes
 

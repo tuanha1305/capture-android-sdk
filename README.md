@@ -61,7 +61,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
 
   ```groovy
   dependencies {
-      implementation('co.hyperverge:hypersnapsdk:3.0.1@aar', {
+      implementation('co.hyperverge:hypersnapsdk:3.1.0@aar', {
           transitive=true
           exclude group: 'com.google.android.gms'
           exclude group: 'co.hyperverge', module: 'hypersnapsdk-instructions'
@@ -75,7 +75,7 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   2. To use the QR Scannner module, please remove the exclude statement for `hypersnapsdk-qrscanner`
   3. To get PDF versions of the captured documents, please remove the exclude statement for `hypersnap-pdfconverter`
   4. If you would like to use location information from the EXIF data of the image, please remove the exclude statement for `com.google.android.gms`
-  5. If your app is still compiling at Android versions below 28, please replace 'co.hyperverge:hypersnapsdk:3.0.1@aar' with 'co.hyperverge:hypersnapsdk:2.5.17@aar'. Although HyperSnap v2.5.17 supports apps compiling at Android versions 26 and 27, it is being deprecated in the coming months. There will be only bug fixes and no new features added to this version. Please contact HyperVerge for more details.
+  5. If your app is still compiling at Android versions below 28, please replace 'co.hyperverge:hypersnapsdk:3.1.0@aar' with 'co.hyperverge:hypersnapsdk:2.5.17@aar'. Although HyperSnap v2.5.17 supports apps compiling at Android versions 26 and 27, it is being deprecated in the coming months. There will be only bug fixes and no new features added to this version. Please contact HyperVerge for more details.
 
 - Add the following set of lines to the Project (top-level) `build.gradle`
 
@@ -461,8 +461,10 @@ These are the possible error codes that could be received from the server:
               <color name="shadow_color">#80000000</color>
             ```
 
-   - In order to customise font, border color, text size, text color different styles are used within the TextViews. The style names can be used in the parent app to change the properties.   
-   - [Calligraphy](https://github.com/chrisjenx/Calligraphy) library is used to load the fonts from assets folder.
+   - **Fonts**: 
+     - **SDK version >= 29** : For apps compiling and targeting at Android 29 and above, please use the HyperSnap SDK version `3.1.0` and above to customise fonts as described [here](FONTS.md). 
+     - **SDK version <29** : In order to customise font, border color, text size, text color different styles are used within the TextViews. The style names can be used in the parent app to change the properties. [Calligraphy](https://github.com/chrisjenx/Calligraphy) library is used to load the fonts from assets folder.
+
    - **styles.xml**:      
         - **The following style is used by all the title texts in the SDK.**
             ```xml
