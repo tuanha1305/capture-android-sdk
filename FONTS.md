@@ -79,13 +79,13 @@ hvFaceConfig.setStatusTypeFace(R.font.roboto_regular);
 HVFaceConfig hvFaceConfig = new HVFaceConfig();
 JSONObject stringObj = new JSONObject();
 
-stringObj.put("faceInstructionsTitleTypeFace", R.font.bad_script);
-stringObj.put("faceInstructionsTop1TypeFace", R.font.bad_script);
-stringObj.put("faceInstructionsTop2TypeFace", R.font.bad_script);
-stringObj.put("faceInstructionsBrightLightTypeFace", R.font.bad_script);
-stringObj.put("faceInstructionsNoHatTypeFace", R.font.bad_script);
-stringObj.put("faceInstructionsNoGlassesTypeFace", R.font.bad_script);
-stringObj.put("faceInstructionsProceedBackCamTypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsTitleTypeFace", R.font.roboto_regular);
+stringObj.put("faceInstructionsTop1TypeFace", R.font.roboto_regular);
+stringObj.put("faceInstructionsTop2TypeFace", R.font.roboto_regular);
+stringObj.put("faceInstructionsBrightLightTypeFace", R.font.roboto_regular);
+stringObj.put("faceInstructionsNoHatTypeFace", R.font.roboto_regular);
+stringObj.put("faceInstructionsNoGlassesTypeFace", R.font.roboto_regular);
+stringObj.put("faceInstructionsProceedBackCamTypeFace", R.font.roboto_regular);
 
 config.setCustomUIStrings(stringObj);
 ```
