@@ -46,8 +46,21 @@ hvDocConfig.setReviewScreenRetakeButtonTypeface(R.font.roboto_regular);
 HVDocConfig hvDocConfig = new HVDocConfig();
 hvDocConfig.setReviewScreenConfirmButtonTypeface(R.font.roboto_regular);
 ```
+### 3. Customising fonts in document instructions screen
+```
+HVDocConfig hvDocConfig = new HVDocConfig();
+JSONObject stringObj = new JSONObject();
 
-### 3. Customising fonts in face capture screen
+stringObj.put("docInstructionsTitleTypeFace", R.font.roboto_regular);
+stringObj.put("docInstructions1TypeFace", R.font.roboto_regular);
+stringObj.put("docInstructions2TypeFace", R.font.roboto_regular);
+stringObj.put("docInstructions3TypeFace", R.font.roboto_regular);
+stringObj.put("docInstructionsProceedTypeFace", R.font.roboto_regular);
+
+hvDocConfig.setCustomUIStrings(R.font.roboto_regular);
+```
+
+### 4. Customising fonts in face capture screen
 
 - **Set face capture screen title TextView font**
 ```
@@ -59,4 +72,20 @@ hvFaceConfig.setTitleTypeface(R.font.roboto_regular);
 ```
 HVFaceConfig hvFaceConfig = new HVFaceConfig();
 hvFaceConfig.setStatusTypeFace(R.font.roboto_regular);
+```
+
+### 5. Customising fonts in face instructions screen
+```
+HVFaceConfig hvFaceConfig = new HVFaceConfig();
+JSONObject stringObj = new JSONObject();
+
+stringObj.put("faceInstructionsTitleTypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsTop1TypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsTop2TypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsBrightLightTypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsNoHatTypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsNoGlassesTypeFace", R.font.bad_script);
+stringObj.put("faceInstructionsProceedBackCamTypeFace", R.font.bad_script);
+
+config.setCustomUIStrings(stringObj);
 ```
