@@ -57,7 +57,7 @@ stringObj.put("docInstructions2TypeFace", R.font.roboto_regular);
 stringObj.put("docInstructions3TypeFace", R.font.roboto_regular);
 stringObj.put("docInstructionsProceedTypeFace", R.font.roboto_regular);
 
-hvDocConfig.setCustomUIStrings(R.font.roboto_regular);
+hvDocConfig.setCustomUIStrings(stringObj);
 ```
 
 ### 4. Customising fonts in face capture screen
@@ -87,5 +87,5 @@ stringObj.put("faceInstructionsNoHatTypeFace", R.font.roboto_regular);
 stringObj.put("faceInstructionsNoGlassesTypeFace", R.font.roboto_regular);
 stringObj.put("faceInstructionsProceedBackCamTypeFace", R.font.roboto_regular);
 
-config.setCustomUIStrings(stringObj);
+hvFaceConfig.setCustomUIStrings(stringObj);
 ```
