@@ -461,7 +461,7 @@ These are the possible error codes that could be received from the server:
               <color name="shadow_color">#80000000</color>
             ```
 
-   - For apps compiling and targeting at Android 29 and above, please use the HyperSnap SDK version 3.1.0 and above to customise fonts as described [here](FONTS.md). Read on if your app is not compiling and targeting at Android 29 and using older versions of the HyperSnap SDK. In order to customise font, border color, text size, text color different styles are used within the TextViews. The style names can be used in the parent app to change the properties.   
+   - **Fonts**: **For apps compiling and targeting at Android 29 and above, please use the HyperSnap SDK version `3.1.0` and above to customise fonts as described [here](FONTS.md)**. Read on if your app is not compiling and targeting at Android 29 and using older versions of the HyperSnap SDK. In order to customise font, border color, text size, text color different styles are used within the TextViews. The style names can be used in the parent app to change the properties.   
    - [Calligraphy](https://github.com/chrisjenx/Calligraphy) library is used to load the fonts from assets folder.
    - **styles.xml**:      
         - **The following style is used by all the title texts in the SDK.**
