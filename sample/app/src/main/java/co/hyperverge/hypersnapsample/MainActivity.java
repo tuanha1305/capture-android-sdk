@@ -3,12 +3,11 @@ package co.hyperverge.hypersnapsample;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.Handler;
 
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Locale;
