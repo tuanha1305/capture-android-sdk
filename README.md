@@ -16,8 +16,8 @@ The framework also includes optional Instructions pages for Document and Face ca
 - Gradle Version 4.1 (Recommended)
 - Tested with Gradle Plugin for Android Studio - version 3.1.0
 - minSdkVersion 19
-- targetSdkVersion 28
-- compileSdkVersion 28
+- targetSdkVersion 29
+- compileSdkVersion 29
 
 ### ChangeLog
 You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
@@ -75,7 +75,8 @@ You can find the ChangeLog in the [CHANGELOG.md](CHANGELOG.md) file
   2. To use the QR Scannner module, please remove the exclude statement for `hypersnapsdk-qrscanner`
   3. To get PDF versions of the captured documents, please remove the exclude statement for `hypersnap-pdfconverter`
   4. If you would like to use location information from the EXIF data of the image, please remove the exclude statement for `com.google.android.gms`
-  5. If your app is still compiling at Android versions below 28, please replace 'co.hyperverge:hypersnapsdk:3.1.3@aar' with 'co.hyperverge:hypersnapsdk:2.5.19@aar'. Although HyperSnap v2.5.19 supports apps compiling at Android versions 26 and 27, it is being deprecated in the coming months. There will be only bug fixes and no new features added to this version. Please contact HyperVerge for more details.
+  5. Version 3.1.3 supports androidx. Therefore it is recommended to migrate to androidx libraries and setting the compileSdkVersion and targetSdkVersion to 29 or above. Please follow the androidx migration provided by Google [here](https://developer.android.com/jetpack/androidx/migrate)
+  6. If your app is still compiling at Android versions below 28, please replace 'co.hyperverge:hypersnapsdk:3.1.3@aar' with 'co.hyperverge:hypersnapsdk:2.5.20@aar'. Although HyperSnap v2.5.20 supports apps compiling at Android versions 26 and 27, it is being deprecated in the coming months. There will be only bug fixes and no new features added to this version. Please contact HyperVerge for more details.
 
 - Add the following set of lines to the Project (top-level) `build.gradle`
 
