@@ -22,26 +22,30 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
     /*
-     * Use hypersnapsdk version 2.5.16 if your app is compiling at Android versions below 28.
-     * We will be deprecating v2.5.x and there will be only bug fixes until January 22nd 2020
-     * Please contact HyperVerge for more details.
+     * Use hypersnapsdk version 2.5.19 if your app is compiling at Android versions below 28 and
+     * follow the integration steps provided in the documentation - https://github.com/hyperverge/capture-android-sdk
+     *
+     * NOTE: We will be deprecating v2.5.x and there will be only bug fixes until January 22nd 2020
+     * Please contact support@hyperverge.co for more details.
      */
-    compile ('co.hyperverge:hypersnapsdk:3.0.0@aar', {
+    implementation ('co.hyperverge:hypersnapsdk:3.1.3@aar', {
         transitive = true
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.google.android.gms'
-
     })
 
-    compile 'com.android.support:appcompat-v7:28.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.1.3'
-    testCompile 'junit:junit:4.12'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    //    implementation ('co.hyperverge:hypersnapsdk:2.5.19@aar', {
+    //        transitive = true
+    //        exclude group: 'com.android.support'
+    //    })
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
 }
