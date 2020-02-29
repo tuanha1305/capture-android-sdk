@@ -202,6 +202,7 @@ Both Document Capture and Face Capture happen via Activities provided in the SDK
 ```java
 //1. Set properties
   HVFaceConfig hvFaceConfig = new HVFaceConfig();
+  hvFaceConfig.setShouldReturnFullImageUrl(true);
   //2. Create Completion Callback
   FaceCaptureCompletionHandler completionCallback = new FaceCaptureCompletionHandler() {
   @Override
@@ -226,6 +227,7 @@ Both Document Capture and Face Capture happen via Activities provided in the SDK
   - **hvFaceConfig**: This is an object of type `HVFaceConfig`. Its properties can be set with the setter methods provided for them. These are the various properties provided:
     - **setLivenessMode**: (HVFaceConfig.LivenessMode) Explained [later](#Liveness-in-Face-Capture).
     - **setShouldShowInstructionPage**: (Boolean) To determine if the instructions page should be shown before capture page. It defaults to `false`.
+    - **setShouldReturnFullImageUrl**: (Boolean) To determine if the full image that is captured by the SDK should be returned  along with result JSONObject. The key name is `fullImageUri` . It defaults to `false`.
     - **setFaceCaptureTitle**: (String) It allows to modify the title text that is shown in HVFaceActivity.
     -  **setLivenessAPIHeaders(_ headers : [String:String])**  : Any additional headers you want to send with the Liveness API Call. Following are headers that could be sent.
         -   _referenceId_: (String) This is a unique identifier that is assigned to the end customer by the API user. It would be the same for the different API calls made for the same customer. This would facilitate better analysis of user flow etc.
