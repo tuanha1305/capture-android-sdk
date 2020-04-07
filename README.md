@@ -173,7 +173,7 @@ Both Document Capture and Face Capture happen via Activities provided in the SDK
 				- Driving License
 		      - Aadhaar Card (India)
 		      - PAN Card (India)
-		      - National ID (India)
+		      - National ID (Vietnam)
 		      - MRC (Vietnam)
           - **PASSPORT**: Aspect ratio: 0.67.  This is for Passports.
           - **A4**: Aspect ratio: 1.4.
